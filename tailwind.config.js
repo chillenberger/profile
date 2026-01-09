@@ -9,7 +9,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#e2725b',
+        primary: '#e2725b', // Keeping original primary for now, will replace usage with neons later
+        'cyber-black': '#050505',
+        'cyber-gray': '#1a1a1a',
+        'neon-blue': '#00f3ff',
+        'neon-purple': '#bc13fe',
+        'neon-green': '#0aff0a',
+        'acid-yellow': '#f0ff00',
+      },
+      boxShadow: {
+        'neon-blue': '0 0 10px #00f3ff, 0 0 20px #00f3ff, 0 0 40px #00f3ff',
+        'neon-purple': '0 0 10px #bc13fe, 0 0 20px #bc13fe, 0 0 40px #bc13fe',
+        'neon-green': '0 0 10px #0aff0a, 0 0 20px #0aff0a, 0 0 40px #0aff0a',
+        'screen-glow': '0 0 20px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0, 243, 255, 0.05)',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
