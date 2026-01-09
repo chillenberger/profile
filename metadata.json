@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Daniel Illenberger Portfolio",
+  "description": "Professional portfolio of Daniel Illenberger, a Full-Stack Software Engineer with a background in Nuclear Physics and Navy Operations.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
