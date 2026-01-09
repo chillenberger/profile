@@ -14,9 +14,9 @@ const Background: React.FC = () => (
     <div className="absolute bottom-[20%] right-[15%] w-[200px] h-[200px] bg-blue-500/10 rounded-full blur-[80px] animate-float-slow animation-delay-2000"></div>
     <div className="absolute top-[50%] left-[40%] w-[100px] h-[100px] bg-white/5 rounded-full blur-[40px] animate-float-slow animation-delay-4000"></div>
 
-    <div className="absolute top-[20%] left-[30%] w-1.5 h-1.5 bg-primary/60 rounded-full animate-pulse-glow"></div>
-    <div className="absolute top-[60%] right-[40%] w-2 h-2 bg-blue-400/50 rounded-full animate-pulse-glow animation-delay-2000"></div>
-    <div className="absolute bottom-[10%] left-[50%] w-1.5 h-1.5 bg-white/40 rounded-full animate-pulse-glow animation-delay-4000"></div>
+    <div className="absolute top-[20%] left-[30%] w-1.5 h-1.5 bg-primary/60 rounded-full animate-wander"></div>
+    <div className="absolute top-[60%] right-[40%] w-2 h-2 bg-blue-400/50 rounded-full animate-wander-delayed animation-delay-2000"></div>
+    <div className="absolute bottom-[10%] left-[50%] w-1.5 h-1.5 bg-white/40 rounded-full animate-wander-slow animation-delay-4000"></div>
 
     <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080801a_1px,transparent_1px),linear-gradient(to_bottom,#8080801a_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_0%,#000_80%,transparent_100%)]"></div>
 
@@ -96,7 +96,7 @@ const Hero: React.FC = () => (
           </span>
         </h1>
         <p className="text-lg text-slate-400 max-w-lg leading-relaxed">
-          A Full-Stack Software Engineer with a background in <span className="text-white font-semibold italic">Physics</span> and <span className="text-white font-semibold italic">Navy Nuclear Engineering</span>. I build high-performance systems where safety, scalability, and modern design converge.
+          A Full-Stack Software Engineer with a background in <span className="text-white font-semibold italic">Physics</span> and <span className="text-white font-semibold italic">Nuclear Engineering</span>. I build high-performance systems where safety, scalability, and modern design converge.
         </p>
         <div className="flex flex-wrap gap-4">
           <a href="#experience" className="bg-slate-100 hover:bg-white text-slate-900 px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/10">
