@@ -29,7 +29,7 @@ Guidelines:
 - If you don't know an answer based on the resume data, say so politely.
 `;
 
-export async function askGeminiAboutChris(userMessage: string) {
+export async function askGeminiAboutDaniel(userMessage: string) {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
     const response = await ai.models.generateContent({

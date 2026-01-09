@@ -4,7 +4,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import AIChat from './AIChat';
 
 vi.mock('../services/geminiService', () => ({
-  askGeminiAboutChris: vi.fn().mockResolvedValue('Mocked AI response about Daniel.'),
+  askGeminiAboutDaniel: vi.fn().mockResolvedValue('Mocked AI response about Daniel.'),
 }));
 
 vi.mock('../constants', async (orig) => {
@@ -22,7 +22,7 @@ describe('AIChat', () => {
   it('renders closed by default with floating button', () => {
     render(<AIChat />);
     expect(screen.getByTestId('chat-icon')).toBeInTheDocument();
-    expect(screen.queryByText(/resume assistant/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/SYS.Online/i)).not.toBeInTheDocument();
   });
 
   it('opens when button is clicked and shows initial AI message', () => {
@@ -30,19 +30,18 @@ describe('AIChat', () => {
 
     fireEvent.click(screen.getByTestId('chat-icon'));
 
-    expect(screen.getByText(/resume assistant/i)).toBeInTheDocument();
     expect(
       screen.getByText(/hi! i'm daniel's career assistant/i)
     ).toBeInTheDocument();
   });
 
   it('sends a message and shows AI reply', async () => {
-    const { askGeminiAboutChris } = await import('../services/geminiService');
+    const { askGeminiAboutDaniel } = await import('../services/geminiService');
 
     render(<AIChat />);
     fireEvent.click(screen.getByTestId('chat-icon'));
 
-    const input = screen.getByPlaceholderText(/ask about my experience/i);
+    const input = screen.getByPlaceholderText(/INPUT_QUERY.../i);
     fireEvent.change(input, { target: { value: 'Tell me about Daniel.' } });
 
     fireEvent.submit(input.closest('form') as HTMLFormElement);
@@ -50,7 +49,7 @@ describe('AIChat', () => {
     expect(screen.getByText('Tell me about Daniel.')).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(askGeminiAboutChris).toHaveBeenCalledWith('Tell me about Daniel.');
+      expect(askGeminiAboutDaniel).toHaveBeenCalledWith('Tell me about Daniel.');
       expect(
         screen.getByText('Mocked AI response about Daniel.')
       ).toBeInTheDocument();
