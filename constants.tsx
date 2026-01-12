@@ -116,32 +116,14 @@ export const PROJECTS: ProjectItem[] = [
 export const BLOG_POSTS: BlogPost[] = [
   {
     id: 'scaling-postgresml',
-    title: 'Scaling PostgresML: Bringing AI to the Database',
-    date: 'March 15, 2024',
-    summary: 'A deep dive into how we built PostgresML at Hyperparam to enable real-time machine learning directly within PostgreSQL using Rust.',
-    tags: ['Rust', 'ML', 'PostgreSQL'],
+    title: 'Text Editors Arn\'t just for Coders',
+    date: 'January 12, 2026',
+    summary: 'Wading into the pool of text editors for non-coders.',
+    tags: ['Text Editors', 'AI', 'Electron', 'TypeScript', 'Tailwind', 'OpenAI API', 'SQL'],
     readTime: '8 min read',
     content: (
       <div className="space-y-6 text-slate-300 leading-relaxed">
-        <p>
-          Machine learning workflows have traditionally been fragmented. Data lives in the database, but training and inference happen in separate microservices. This introduces latency, complexity, and data consistency issues. At Hyperparam, we asked a simple question: <strong>What if the database could do the thinking?</strong>
-        </p>
-        <h3 className="text-xl font-bold text-white mt-8 mb-4">The Architecture</h3>
-        <p>
-          We chose Rust for its memory safety and performance, embedding it directly into PostgreSQL as an extension. This allows us to run XGBoost and light transformer models right where the data resides. No network calls, no serialization overhead.
-        </p>
-        <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto border border-slate-800 my-6">
-          <code className="text-sm font-mono text-blue-400">
-            {`SELECT pgml.train(
-  'Project Tracker', 
-  task => 'duration', 
-  'pgml.snapshot_projects'
-);`}
-          </code>
-        </pre>
-        <p>
-          The result? We saw inference speeds jump by 400% compared to typical HTTP-based microservices, simply by removing the network hop and leveraging zero-copy data access.
-        </p>
+        <p>Text editors are a tool that every coder uses every day. </p>
       </div>
     )
   },
@@ -168,85 +150,6 @@ export const BLOG_POSTS: BlogPost[] = [
         </ul>
         <p>
           Applying these principles to CI/CD pipelines has saved my teams from countless production outages. It turns out, reliability is a feature, not just a byproduct.
-        </p>
-      </div>
-    )
-  },
-  {
-    id: 'micro-frontends-single-spa',
-    title: 'Building Micro Frontends with Single-SPA',
-    date: 'November 10, 2023',
-    summary: 'Practical lessons from implementing a modular logistics dashboard for Smart Warehousing using the Single-SPA architecture.',
-    tags: ['React', 'Frontend', 'Architecture'],
-    readTime: '5 min read',
-    content: (
-      <div className="space-y-6 text-slate-300 leading-relaxed">
-        <p>
-          Monoliths are comfortable, but they scale poorly when you have multiple teams working on the same frontend. At Smart Warehousing, we hit a wall with build times exceeding 20 minutes.
-        </p>
-        <p>
-          We adopted <strong>Single-SPA</strong> to break our React application into micro-frontends. This allowed our Inventory team to deploy independently from the Shipping team.
-        </p>
-        <div className="bg-slate-800/50 border-l-4 border-primary p-4 my-6">
-          <p className="italic text-slate-400">
-            "The hardest part wasn't the code—it was the shared dependencies."
-          </p>
-        </div>
-        <p>
-          We solved dependency hell by using Webpack Module Federation for shared core libraries (like our design system), while keeping business logic isolated. The result was a drop in build times to under 2 minutes and a massive boost in developer velocity.
-        </p>
-      </div>
-    )
-  },
-  {
-    id: 'future-of-ai-coding',
-    title: 'The Future of AI in Coding',
-    date: 'April 02, 2024',
-    summary: 'Exploring how agentic workflows and LLMs are transforming the role of the software engineer from writer to architect.',
-    tags: ['AI', 'Future', 'DevTools'],
-    readTime: '4 min read',
-    content: (
-      <div className="space-y-6 text-slate-300 leading-relaxed">
-        <p>
-          We are witnessing a paradigm shift. Tools like GitHub Copilot and Google's Gemini aren't just autocomplete on steroids; they are reasoning engines capable of executing complex tasks.
-        </p>
-        <h3 className="text-xl font-bold text-white mt-8 mb-4">From Syntax to Semantics</h3>
-        <p>
-          The developer's role is shifting. We spend less time remembering syntax and more time designing systems. The skill of the future isn't memorizing the React API, but effectively communicating intent to an AI agent.
-        </p>
-        <p>
-          This doesn't mean engineers are obsolete. It means our leverage has increased 10x. One engineer can now build what used to take a team of five.
-        </p>
-      </div>
-    )
-  },
-  {
-    id: 'rust-vs-go',
-    title: 'Rust vs Go: Picking the Right Tool',
-    date: 'May 12, 2024',
-    summary: 'A pragmatic look at when to choose Rust for performance and safety versus Go for simplicity and concurrency.',
-    tags: ['Rust', 'Go', 'Backend'],
-    readTime: '7 min read',
-    content: (
-      <div className="space-y-6 text-slate-300 leading-relaxed">
-        <p>
-          The debate is endless, but the choice is usually clear if you look at the constraints.
-        </p>
-        <h3 className="text-xl font-bold text-white mt-8 mb-4">Go: The Cloud Native Workhorse</h3>
-        <p>
-          Go is fantastic for network services. Goroutines make handling thousands of concurrent connections trivial. If I'm building a standard microservice, Go is often my default.
-        </p>
-        <h3 className="text-xl font-bold text-white mt-8 mb-4">Rust: When Control Matters</h3>
-        <p>
-          Rust shines when you need:
-        </p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Zero garbage collection pauses.</li>
-          <li>Complex memory layouts.</li>
-          <li>Type-level guarantees of correctness.</li>
-        </ul>
-        <p>
-          At Hyperparam, we chose Rust because we were embedding into Postgres. We couldn't afford a GC pause in the middle of a database transaction.
         </p>
       </div>
     )

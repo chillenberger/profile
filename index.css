@@ -5,7 +5,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* background-color: #050505; Removed to allow fixed background component to show */
+    background-color: #050505;
     color: #e0e0e0;
   }
 

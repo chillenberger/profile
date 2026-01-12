@@ -5,15 +5,29 @@ import { EXPERIENCES, EDUCATION, PROJECTS, SKILLS, BLOG_POSTS, Icons } from './c
 import AIChat from './components/AIChat';
 
 const Background: React.FC = () => (
-  <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-cyber-black">
+  <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    {/* Base background */}
+    <div className="absolute inset-0 bg-[#050505]"></div>
+
     {/* CRT Overlay */}
     <div className="absolute inset-0 crt-overlay opacity-30"></div>
 
-    {/* Cyber Grid */}
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#00f3ff1a_1px,transparent_1px),linear-gradient(to_bottom,#00f3ff1a_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
+    {/* Cyber Grid - More visible version */}
+    <div
+      className="absolute inset-0 opacity-30"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(0, 243, 255, 0.2) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 243, 255, 0.2) 1px, transparent 1px)
+        `,
+        backgroundSize: '40px 40px',
+        maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
+      }}
+    ></div>
 
     {/* Searchlights / Atmosphere */}
-    <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] rounded-full bg-neon-blue/5 blur-[100px] animate-tilt"></div>
+    <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] rounded-full opacity-50 bg-neon-blue/5 blur-[100px] animate-tilt"></div>
     <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-neon-purple/10 blur-[120px] animate-pulse-glow"></div>
   </div>
 );
@@ -407,13 +421,15 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen selection:bg-neon-blue/30 relative">
       <Background />
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/blog/:id" element={<BlogPage />} />
-      </Routes>
-      <AIChat />
+      <div className="relative z-10">
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:id" element={<BlogPage />} />
+        </Routes>
+        <AIChat />
+      </div>
     </div>
   );
 };
