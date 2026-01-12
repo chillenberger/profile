@@ -35,6 +35,8 @@ export default {
         'wander': "wander 20s infinite alternate ease-in-out",
         'wander-delayed': "wander 25s infinite alternate-reverse ease-in-out",
         'wander-slow': "wander 30s infinite alternate ease-in-out",
+        'flicker': "flicker 4s infinite",
+        'neon-pulse': "neon-pulse 2s infinite ease-in-out",
       },
       keyframes: {
         wander: {
@@ -91,7 +93,51 @@ export default {
           "75%": {
             transform: "rotate(-0.5deg)",
           },
-        }
+        },
+        flicker: {
+          "0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%": {
+            opacity: 0.99,
+          },
+          "20%, 21.999%, 63%, 63.999%, 65%, 69.999%": {
+            opacity: 0.4,
+          },
+        },
+        "traffic-move": {
+          "0%": {
+            transform: "translateX(-100%) translateY(0)",
+            opacity: 0,
+          },
+          "10%, 90%": {
+            opacity: 1,
+          },
+          "100%": {
+            transform: "translateX(200vw) translateY(50px)",
+            opacity: 0,
+          },
+        },
+        "traffic-move-reverse": {
+          "0%": {
+            transform: "translateX(100%) translateY(0)",
+            opacity: 0,
+          },
+          "10%, 90%": {
+            opacity: 1,
+          },
+          "100%": {
+            transform: "translateX(-200vw) translateY(-50px)",
+            opacity: 0,
+          },
+        },
+        "neon-pulse": {
+          "0%, 100%": {
+            opacity: 0.6,
+            filter: "brightness(1)",
+          },
+          "50%": {
+            opacity: 1,
+            filter: "brightness(1.2)",
+          },
+        },
       },
     },
   },
