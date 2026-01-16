@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { RainOverlay } from './RainOverlay';
 
 export const CityscapeBackground: React.FC = () => {
-  const [offsetY, setOffsetY] = useState(0);
+  const [bgOffset, setBgOffset] = useState(0);
+  const [fgOffset, setFgOffset] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -11,13 +12,22 @@ export const CityscapeBackground: React.FC = () => {
       const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
 
       const viewportHeight = window.innerHeight;
-      const bgHeight = viewportHeight * 2.5; // 250vh
+      const totalHeight = viewportHeight * 2.5; // 250vh
 
-      const targetY = -1 * progress * (bgHeight - viewportHeight);
-      setOffsetY(targetY);
+      // Base range to scroll the entire scene
+      const baseRange = totalHeight - viewportHeight;
+
+      // Background (sky/distant towers) moves slightly slower
+      const targetBgY = -1 * progress * baseRange * 0.95;
+
+      // Foreground (closer buildings + street) moves slightly faster
+      const targetFgY = -1 * progress * baseRange * 1.05;
+
+      setBgOffset(targetBgY);
+      setFgOffset(targetFgY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll);
     handleScroll(); // Init
 
@@ -32,36 +42,56 @@ export const CityscapeBackground: React.FC = () => {
       {/* Rain Effect on Top */}
       <RainOverlay />
 
-      {/* Moving Container */}
+      {/* Skyline Background Layer */}
       <div
-        ref={containerRef}
         className="absolute top-0 left-0 right-0 w-full will-change-transform transition-transform duration-75 ease-out"
         style={{
           height: '250vh',
-          transform: `translate3d(0, ${offsetY}px, 0)`
+          transform: `translate3d(0, ${bgOffset}px, 0)`,
+          zIndex: 1
         }}
       >
-        {/* Top Layer: Skyline */}
         <div
-          className="absolute top-0 left-0 w-full h-[55%] bg-cover bg-bottom"
+          className="absolute top-0 left-0 w-full h-[60%] bg-cover bg-bottom"
           style={{
-            backgroundImage: 'url(/images/city-top.png)',
-            maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)'
+            backgroundImage: 'url(/images/city-top-background.png)',
+            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
           }}
         >
-          {/* Traffic - Skyway Type */}
-          <div className="absolute top-[30%] left-[-20%] w-[140%] h-[2px] opacity-70"
-            style={{ animation: 'traffic-move 15s linear infinite', background: 'linear-gradient(90deg, transparent, #ff0000, transparent)' }}></div>
-          <div className="absolute top-[50%] left-[-20%] w-[140%] h-[2px] opacity-50"
-            style={{ animation: 'traffic-move 20s linear infinite reverse', animationDelay: '2s', background: 'linear-gradient(90deg, transparent, #ffffff, transparent)' }}></div>
+          {/* Subtle slow traffic in the distance */}
+          <div className="absolute top-[30%] left-[-20%] w-[140%] h-[1px] opacity-30"
+            style={{ animation: 'traffic-move 30s linear infinite', background: 'linear-gradient(90deg, transparent, #ff0000, transparent)' }}></div>
+        </div>
+      </div>
 
-          {/* Random Lights/Flicker */}
+      {/* Skyline Foreground Layer */}
+      <div
+        className="absolute top-0 left-0 right-0 w-full will-change-transform transition-transform duration-75 ease-out"
+        style={{
+          height: '250vh',
+          transform: `translate3d(0, ${fgOffset}px, 0)`,
+          zIndex: 2
+        }}
+      >
+        <div
+          className="absolute top-0 left-0 w-full h-[60%] bg-cover bg-bottom"
+          style={{
+            backgroundImage: 'url(/images/city-top-foreground-2.png)',
+            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
+          }}
+        >
+          {/* Foreground Traffic */}
+          <div className="absolute top-[50%] left-[-20%] w-[140%] h-[2px] opacity-50"
+            style={{ animation: 'traffic-move 15s linear infinite reverse', animationDelay: '2s', background: 'linear-gradient(90deg, transparent, #ffffff, transparent)' }}></div>
+
+          {/* Lights/Flicker */}
           <div className="absolute top-[20%] left-[20%] w-[50px] h-[50px] bg-neon-blue rounded-full opacity-20 blur-xl animate-pulse"></div>
           <div className="absolute top-[60%] right-[30%] w-[5px] h-[5px] bg-neon-purple opacity-80 shadow-[0_0_10px_#bc13fe] animate-flicker"></div>
         </div>
 
-        {/* Bottom Layer: Street */}
+        {/* Street Layer (moves with foreground) */}
         <div
           className="absolute bottom-0 left-0 w-full h-[55%] bg-cover bg-top"
           style={{
@@ -79,7 +109,7 @@ export const CityscapeBackground: React.FC = () => {
           <div className="absolute bottom-[30%] right-[20%] w-[80px] h-[200px] bg-neon-purple/20 blur-2xl animate-pulse" style={{ animationDuration: '5s' }}></div>
         </div>
 
-        {/* Bridge/Blend Layer (Darken the middle seam) */}
+        {/* Bridge/Blend Layer */}
         <div className="absolute top-[45%] bottom-[45%] w-full bg-black/80 blur-xl"></div>
       </div>
 
