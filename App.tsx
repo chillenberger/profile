@@ -10,6 +10,16 @@ import { CityscapeBackground } from './components/CityscapeBackground';
 const Nav: React.FC = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const [scrollY, setScrollY] = React.useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id: string, e: React.MouseEvent) => {
     if (!isHome) return; // Allow normal navigation if not on home
@@ -20,8 +30,18 @@ const Nav: React.FC = () => {
     }
   };
 
+  // Calculate opacity based on scroll
+  // Starts appearing at 10px, fully transition by 100px
+  const opacity = Math.min(Math.max((scrollY - 10) / 90, 0), 1);
+
   return (
-    <nav className="sticky top-0 z-40 bg-cyber-black/90 backdrop-blur-sm border-b border-neon-blue/20">
+    <nav
+      className="sticky top-0 z-40 backdrop-blur-sm transition-colors duration-300"
+      style={{
+        backgroundColor: `rgba(10, 11, 14, ${opacity * 0.9})`,
+        borderBottom: `1px solid rgba(0, 243, 255, ${opacity * 0.2})`
+      }}
+    >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="text-xl font-black text-neon-blue tracking-widest hover:text-shadow-neon transition-all">
           DI_SYSTEM
@@ -62,9 +82,9 @@ const Nav: React.FC = () => {
 };
 
 const Hero: React.FC = () => (
-  <section id="about" className="pt-24 pb-16 px-6 max-w-6xl mx-auto">
-    <div className="grid lg:grid-cols-2 gap-12 items-center">
-      <div className="relative group max-w-2xl mx-auto lg:mx-0">
+  <section id="about" className="pt-36 pb-32 px-6 max-w-6xl mx-auto">
+    <div className="grid lg:grid-cols- gap-12 items-center">
+      <div className="relative group max-w-xl ml-auto">
         <div className="industrial-frame bg-cyber-black/80 overflow-hidden shadow-2xl relative">
           {/* Frame Buttons Left */}
           <div className="absolute left-[-22px] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
@@ -91,7 +111,7 @@ const Hero: React.FC = () => (
                 <div className="space-y-2 font-mono text-[10px] md:text-xs">
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Manufacture</span>
-                    <span className="text-neon-blue font-bold">TYRELL_CORP // HEAVY_IND</span>
+                    <span className="text-neon-blue font-bold"> HEAVY_IND</span>
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Model</span>
@@ -173,7 +193,7 @@ const Hero: React.FC = () => (
           </div>
         </div>
       </div>
-      <div className="space-y-6">
+      {/* <div className="space-y-6">
         <p className="text-lg text-slate-400 max-w-lg leading-relaxed font-mono">
           Full-Stack Engineer / Startup Enthusiast <br />
           Directives: <span className="text-neon-blue">AI Implementation</span>, <span className="text-neon-purple">Scalability</span>, <span className="text-neon-green">Performance</span>.
@@ -186,13 +206,13 @@ const Hero: React.FC = () => (
             <Icons.Github /> Github
           </a>
         </div>
-      </div>
+      </div> */}
     </div>
   </section>
 );
 
 const SectionHeading: React.FC<{ children: React.ReactNode; id: string; subtitle?: string }> = ({ children, id, subtitle }) => (
-  <div className="mb-12" id={id}>
+  <div className="mb-24" id={id}>
     <h2 className="text-3xl font-bold mb-4 uppercase tracking-widest text-white flex items-center gap-4">
       <span className="text-neon-blue text-2xl font-mono">0x{id.substring(0, 2).toUpperCase()}</span>
       {children}
@@ -215,7 +235,10 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -25% 0px' // Wait until element is near middle of screen
+      }
     );
 
     if (ref.current) {
@@ -239,7 +262,7 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
 };
 
 const Experience: React.FC = () => (
-  <section id="experience" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
+  <section id="experience" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="experience" subtitle="Professional employment history log.">
       Experience_Log
     </SectionHeading>
@@ -280,7 +303,7 @@ const Experience: React.FC = () => (
 );
 
 const Projects: React.FC = () => (
-  <section id="projects" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
+  <section id="projects" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="projects" subtitle="Selected side projects and technical deep-dives.">
       Project_Database
     </SectionHeading>
@@ -326,7 +349,7 @@ const Projects: React.FC = () => (
 );
 
 const Skills: React.FC = () => (
-  <section id="skills" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
+  <section id="skills" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="skills" subtitle="My core stack and specialized competencies.">
       Technical_Toolkit
     </SectionHeading>
@@ -353,7 +376,7 @@ const Skills: React.FC = () => (
 );
 
 const Education: React.FC = () => (
-  <section id="education" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
+  <section id="education" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="education" subtitle="Academic background and specialized certifications.">
       Education_Records
     </SectionHeading>
