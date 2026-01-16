@@ -95,11 +95,11 @@ const Hero: React.FC = () => (
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Model</span>
-                    <span className="text-neon-blue font-bold">FULL_STACK_ARCHITECT</span>
+                    <span className="text-neon-blue font-bold">FULL_STACK_DEVELOPER</span>
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Origination</span>
-                    <span className="text-acid-yellow font-bold italic">NUCLEAR_ENGINEERING</span>
+                    <span className="text-acid-yellow font-bold italic">PHYSICS / NUCLEAR</span>
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Mental_Class</span>
@@ -175,8 +175,8 @@ const Hero: React.FC = () => (
       </div>
       <div className="space-y-6">
         <p className="text-lg text-slate-400 max-w-lg leading-relaxed font-mono">
-          System Architect / Full-Stack Engineer. <br />
-          Directives: <span className="text-neon-blue">Safety</span>, <span className="text-neon-purple">Scalability</span>, <span className="text-neon-green">Performance</span>.
+          Full-Stack Engineer / Startup Enthusiast <br />
+          Directives: <span className="text-neon-blue">AI Implementation</span>, <span className="text-neon-purple">Scalability</span>, <span className="text-neon-green">Performance</span>.
         </p>
         <div className="flex flex-wrap gap-4">
           <a href="#experience" className="bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue px-6 py-3 font-bold transition-all border border-neon-blue shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-neon-blue uppercase tracking-widest text-sm">
