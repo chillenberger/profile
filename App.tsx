@@ -65,7 +65,7 @@ const Hero: React.FC = () => (
   <section id="about" className="pt-24 pb-16 px-6 max-w-6xl mx-auto">
     <div className="grid lg:grid-cols-2 gap-12 items-center">
       <div className="relative group max-w-2xl mx-auto lg:mx-0">
-        <div className="industrial-frame bg-cyber-black overflow-hidden shadow-2xl relative">
+        <div className="industrial-frame bg-cyber-black/80 overflow-hidden shadow-2xl relative">
           {/* Frame Buttons Left */}
           <div className="absolute left-[-22px] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
             <div className="industrial-button">P</div>
@@ -78,17 +78,6 @@ const Hero: React.FC = () => (
           <div className="screen-cyan p-6 md:p-8 relative min-h-[420px]">
             {/* CRT Effect Overlay */}
             <div className="crt-overlay absolute inset-0 opacity-10 pointer-events-none z-30"></div>
-
-            {/* Top Analysis Bar */}
-            <div className="flex justify-around mb-8 border-b border-neon-blue/20 pb-4 relative z-20">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-neon-blue/30 bg-neon-blue/5 flex items-center justify-center overflow-hidden relative">
-                  <div className="absolute inset-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] scale-150"></div>
-                  <div className="absolute w-[120%] h-[1px] bg-neon-blue/20 rotate-45"></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-neon-blue/10 to-transparent"></div>
-                </div>
-              ))}
-            </div>
 
             {/* Layout Grid */}
             <div className="grid grid-cols-12 gap-6 relative z-20">
