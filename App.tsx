@@ -64,20 +64,124 @@ const Nav: React.FC = () => {
 const Hero: React.FC = () => (
   <section id="about" className="pt-24 pb-16 px-6 max-w-6xl mx-auto">
     <div className="grid lg:grid-cols-2 gap-12 items-center">
-      <div className="space-y-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-neon-blue/5 border border-neon-blue/20 text-neon-blue text-xs font-mono uppercase tracking-widest">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full bg-neon-blue opacity-75"></span>
-            <span className="relative inline-flex h-2 w-2 bg-neon-blue"></span>
-          </span>
-          System Status: Online
+      <div className="relative group max-w-2xl mx-auto lg:mx-0">
+        <div className="industrial-frame bg-cyber-black overflow-hidden shadow-2xl relative">
+          {/* Frame Buttons Left */}
+          <div className="absolute left-[-22px] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
+            <div className="industrial-button">P</div>
+            <div className="industrial-button">R</div>
+            <div className="industrial-button">O</div>
+            <div className="industrial-button">G</div>
+          </div>
+
+          {/* Main Display Screen */}
+          <div className="screen-cyan p-6 md:p-8 relative min-h-[420px]">
+            {/* CRT Effect Overlay */}
+            <div className="crt-overlay absolute inset-0 opacity-10 pointer-events-none z-30"></div>
+
+            {/* Top Analysis Bar */}
+            <div className="flex justify-around mb-8 border-b border-neon-blue/20 pb-4 relative z-20">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-neon-blue/30 bg-neon-blue/5 flex items-center justify-center overflow-hidden relative">
+                  <div className="absolute inset-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] scale-150"></div>
+                  <div className="absolute w-[120%] h-[1px] bg-neon-blue/20 rotate-45"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-neon-blue/10 to-transparent"></div>
+                </div>
+              ))}
+            </div>
+
+            {/* Layout Grid */}
+            <div className="grid grid-cols-12 gap-6 relative z-20">
+              {/* Left Column: Bio Data */}
+              <div className="col-span-12 md:col-span-7 space-y-4">
+                <div className="bg-neon-blue/5 border-l-2 border-neon-blue p-3">
+                  <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-1">Subject_Identifier</h3>
+                  <p className="text-xl font-bold text-white tracking-tight">DANIEL_ILLENBERGER</p>
+                </div>
+
+                <div className="space-y-2 font-mono text-[10px] md:text-xs">
+                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
+                    <span className="text-slate-500 uppercase tracking-wider">Manufacture</span>
+                    <span className="text-neon-blue font-bold">TYRELL_CORP // HEAVY_IND</span>
+                  </div>
+                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
+                    <span className="text-slate-500 uppercase tracking-wider">Model</span>
+                    <span className="text-neon-blue font-bold">FULL_STACK_ARCHITECT</span>
+                  </div>
+                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
+                    <span className="text-slate-500 uppercase tracking-wider">Origination</span>
+                    <span className="text-acid-yellow font-bold italic">NUCLEAR_ENGINEERING</span>
+                  </div>
+                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
+                    <span className="text-slate-500 uppercase tracking-wider">Mental_Class</span>
+                    <span className="text-neon-green">LEVEL_A_MAX</span>
+                  </div>
+                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
+                    <span className="text-slate-500 uppercase tracking-wider">Status</span>
+                    <span className="text-neon-green animate-pulse">DEPLOYED_BUILDING</span>
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <div className="flex gap-1">
+                    {[...Array(12)].map((_, i) => (
+                      <div key={i} className={`h-1.5 flex-1 ${i < 9 ? 'bg-neon-blue/80 shadow-[0_0_5px_rgba(0,243,255,0.4)]' : 'bg-slate-800'}`}></div>
+                    ))}
+                  </div>
+                  <p className="text-[8px] text-slate-500 mt-2 tracking-[0.2em] uppercase">Neural_Sync_Established: 87.4%</p>
+                </div>
+              </div>
+
+              {/* Right Column: Scan Visual */}
+              <div className="col-span-12 md:col-span-5 space-y-4">
+                <div className="aspect-[4/5] border border-neon-blue/30 bg-neon-blue/5 relative overflow-hidden group/scan shadow-inner">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/10 to-transparent animate-scan-y"></div>
+                  {/* Decorative Scan Brackets */}
+                  <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-neon-blue/60"></div>
+                  <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-neon-blue/60"></div>
+                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-neon-blue/60"></div>
+                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-neon-blue/60"></div>
+
+                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                    <div className="w-24 h-24 border-2 border-neon-blue rounded-full scale-110 animate-ping"></div>
+                  </div>
+
+                  {/* Mock Fingerprint/Profile Scan */}
+                  <div className="absolute inset-4 opacity-30 mix-blend-screen bg-[url('https://www.transparenttextures.com/patterns/micro-carbon.png')]"></div>
+                </div>
+
+                <div className="p-2 border border-neon-purple/20 bg-neon-purple/5 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-neon-purple/40"></div>
+                  <p className="text-[8px] font-mono text-neon-purple leading-tight opacity-70 tracking-tighter">
+                    SYSTEM_AUTH: VALIDATED<br />
+                    REPLICANT_DETECT: NEGATIVE<br />
+                    DECRYPTION: ACTIVE...
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Status Info */}
+            <div className="mt-8 pt-4 border-t border-neon-blue/20 flex justify-between items-end relative z-20">
+              <div className="flex gap-4">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 bg-neon-green rounded-full shadow-[0_0_8px_#0aff0a]"></div>
+                  <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Link_Established</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 bg-neon-purple/40 rounded-full"></div>
+                  <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Enc_V4.2</span>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-[12px] font-bold text-neon-blue tracking-tighter leading-none font-mono">0x4F.2A.99.1</div>
+                <div className="text-[6px] text-slate-600 uppercase tracking-[0.3em] mt-1">Sector_Coordinates</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tighter uppercase font-mono animate-flicker">
-          Daniel <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple text-shadow-neon">
-            Illenberger
-          </span>
-        </h1>
+      </div>
+      <div className="space-y-6">
         <p className="text-lg text-slate-400 max-w-lg leading-relaxed font-mono">
           System Architect / Full-Stack Engineer. <br />
           Directives: <span className="text-neon-blue">Safety</span>, <span className="text-neon-purple">Scalability</span>, <span className="text-neon-green">Performance</span>.
@@ -89,46 +193,6 @@ const Hero: React.FC = () => (
           <a href="https://github.com/chillenberger" target="_blank" rel="noreferrer" className="bg-transparent hover:bg-slate-800 text-slate-300 px-6 py-3 font-bold transition-all border border-slate-700 hover:border-slate-500 uppercase tracking-widest text-sm flex items-center gap-2">
             <Icons.Github /> Github
           </a>
-        </div>
-      </div>
-      <div className="relative group">
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-blue to-neon-purple opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200 blur-sm"></div>
-        <div className="relative bg-cyber-black border border-slate-800 p-8 space-y-6 overflow-hidden shadow-2xl">
-          {/* Terminal Header */}
-          <div className="flex justify-between items-center border-b border-slate-800 pb-4 mb-4">
-            <div className="text-xs font-mono text-slate-500">USER: DANIEL.ILLENBERGER</div>
-            <div className="flex gap-2">
-              <div className="w-2 h-2 bg-slate-600"></div>
-              <div className="w-2 h-2 bg-slate-600"></div>
-            </div>
-          </div>
-
-          <div className="space-y-4 font-mono text-sm sm:text-base text-neon-blue text-shadow-neon">
-            <div className="flex gap-4">
-              <span className="text-slate-600">01</span>
-              <p><span className="text-neon-purple">const</span> engineer = {'{'}</p>
-            </div>
-            <div className="flex gap-4">
-              <span className="text-slate-600">02</span>
-              <p className="ml-4">specialty: <span className="text-acid-yellow">'Full Stack'</span>,</p>
-            </div>
-            <div className="flex gap-4">
-              <span className="text-slate-600">03</span>
-              <p className="ml-4">origination: <span className="text-acid-yellow">'Nuclear_Eng'</span>,</p>
-            </div>
-            <div className="flex gap-4">
-              <span className="text-slate-600">04</span>
-              <p className="ml-4">current_status: <span className="text-neon-green">'Building'</span>,</p>
-            </div>
-            <div className="flex gap-4">
-              <span className="text-slate-600">05</span>
-              <p>{'}'}</p>
-            </div>
-            <div className="flex gap-4 animate-pulse">
-              <span className="text-slate-600">06</span>
-              <p className="ml-4">_</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
