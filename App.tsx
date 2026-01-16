@@ -136,7 +136,10 @@ const Hero: React.FC = () => (
                   </div>
 
                   {/* Mock Fingerprint/Profile Scan */}
-                  <div className="absolute inset-4 opacity-30 mix-blend-screen bg-[url('https://www.transparenttextures.com/patterns/micro-carbon.png')]"></div>
+                  <div
+                    className="absolute inset-4 opacity-70 mix-blend-screen bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: "url('/hologram_man.png')" }}
+                  ></div>
                 </div>
 
                 <div className="p-2 border border-neon-purple/20 bg-neon-purple/5 relative overflow-hidden">

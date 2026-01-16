@@ -33,9 +33,9 @@ const AIChat: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end font-mono">
+    <div className="fixed bottom-6 -right-4 z-50 flex flex-col items-end font-mono">
       {isOpen && (
-        <div className="bg-cyber-black border border-neon-blue w-[350px] sm:w-[400px] h-[500px] shadow-[0_0_20px_rgba(0,243,255,0.2)] flex flex-col mb-4 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 relative">
+        <div className="bg-cyber-black border border-neon-blue w-[350px] sm:w-[400px] h-[500px] shadow-[0_0_20px_rgba(0,243,255,0.2)] flex flex-col mb-4 mr-6 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 relative">
           <div className="crt-overlay absolute inset-0 pointer-events-none z-50 opacity-50"></div>
 
           <div className="bg-slate-900/80 p-4 border-b border-neon-blue flex justify-between items-center relative z-10 backdrop-blur-sm">
@@ -102,21 +102,21 @@ const AIChat: React.FC = () => {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative group transition-all duration-300 ease-in-out hover:scale-105"
+        className="relative group"
       >
-        <div className="absolute inset-0 bg-neon-blue opacity-0 group-hover:opacity-40 blur-xl rounded-full transition-opacity duration-300 animate-pulse"></div>
-        <div className="relative w-20 h-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-neon-blue opacity-0 group-hover:opacity-40 blur-2xl rounded-full transition-opacity duration-300 animate-pulse"></div>
+        <div className="relative w-32 h-32 flex items-center justify-center">
           <img
-            src="/hologram-lady.png"
-            alt="AI Assistant"
+            src="/holographic-neuron.png"
+            alt="Neural Interface"
             data-testid="chat-icon"
-            className="w-full h-full object-contain animate-flicker opacity-90 group-hover:opacity-100 transition-opacity"
+            className="w-full h-full object-contain opacity-60 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_15px_rgba(0,243,255,0.5)]"
           />
-          {!isOpen && (
-            <div className="absolute -top-1 -right-1 bg-neon-blue border border-white text-black text-[10px] font-bold px-1.5 py-0.5 animate-bounce shadow-[0_0_10px_rgba(0,243,255,0.5)]">
+          {/* {!isOpen && (
+            <div className="absolute top-4 right-4 bg-neon-blue border border-white text-black text-[10px] font-bold px-1.5 py-0.5 animate-bounce shadow-[0_0_10px_rgba(0,243,255,0.5)] z-20">
               QUERY
             </div>
-          )}
+          )} */}
         </div>
       </button>
     </div>
