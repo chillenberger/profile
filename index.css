@@ -37,6 +37,101 @@
   .animate-flicker {
     animation: flicker 4s infinite;
   }
+
+  .reveal-flicker {
+    animation: flicker-on 0.8s ease-out forwards;
+  }
+
+  .reveal-scan {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reveal-scan::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent 0%,
+        rgba(0, 243, 255, 0.4) 50%,
+        transparent 100%);
+    height: 2px;
+    z-index: 10;
+    animation: scan-reveal 1.2s ease-in-out forwards;
+  }
+}
+
+@keyframes flicker-on {
+  0% {
+    opacity: 0.1;
+    text-shadow: none;
+  }
+
+  10% {
+    opacity: 0.8;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
+  }
+
+  15% {
+    opacity: 0.2;
+  }
+
+  25% {
+    opacity: 0.9;
+    text-shadow: 0 0 15px rgba(0, 243, 255, 0.9);
+  }
+
+  35% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(0, 243, 255, 1);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scan-reveal {
+  0% {
+    top: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    top: 100%;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flicker {
+
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
+    opacity: 0.99;
+    text-shadow: 0 0 4px #00f3ff, 0 0 10px #00f3ff;
+  }
+
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
 }
 
 

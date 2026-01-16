@@ -198,6 +198,43 @@ const SectionHeading: React.FC<{ children: React.ReactNode; id: string; subtitle
   </div>
 );
 
+const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: number; }> = ({ children, className = "", delay = 0, color = "blue" }) => {
+  const [isVisible, setIsVisible] = React.useState(false);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-2000 ${className} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+    >
+      <div className={isVisible ? "reveal-flicker reveal-scan" : ""}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
 const Experience: React.FC = () => (
   <section id="experience" className="py-20 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="experience" subtitle="Professional employment history log.">
@@ -205,33 +242,35 @@ const Experience: React.FC = () => (
     </SectionHeading>
     <div className="space-y-12">
       {EXPERIENCES.map((exp) => (
-        <div key={exp.id} className="relative pl-8 border-l border-slate-800 group hover:border-neon-blue transition-colors">
-          <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-cyber-black border border-slate-600 group-hover:border-neon-blue group-hover:bg-neon-blue transition-colors"></div>
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-            <div>
-              <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors uppercase tracking-wider">{exp.role}</h3>
-              <p className="text-slate-400 font-medium">{exp.company}</p>
+        <Reveal key={exp.id}>
+          <div className="relative pl-8 border-l border-slate-800 group hover:border-neon-blue transition-colors">
+            <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-cyber-black border border-slate-600 group-hover:border-neon-blue group-hover:bg-neon-blue transition-colors"></div>
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+              <div>
+                <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors uppercase tracking-wider">{exp.role}</h3>
+                <p className="text-slate-400 font-medium">{exp.company}</p>
+              </div>
+              <div className="mt-2 md:mt-0 text-neon-blue/80 text-xs font-mono border border-neon-blue/20 px-2 py-1 bg-neon-blue/5">
+                {exp.period} • {exp.location}
+              </div>
             </div>
-            <div className="mt-2 md:mt-0 text-neon-blue/80 text-xs font-mono border border-neon-blue/20 px-2 py-1 bg-neon-blue/5">
-              {exp.period} • {exp.location}
+            <ul className="space-y-3 mb-6">
+              {exp.description.map((bullet, idx) => (
+                <li key={idx} className="text-slate-400 text-sm leading-relaxed flex gap-3 font-mono">
+                  <span className="text-neon-blue mt-0.5">»</span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-2">
+              {exp.skills?.map(skill => (
+                <span key={skill} className="px-2 py-0.5 bg-slate-900 border border-slate-700 text-[10px] font-mono text-slate-400 uppercase tracking-wide hover:border-neon-blue hover:text-neon-blue transition-colors">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
-          <ul className="space-y-3 mb-6">
-            {exp.description.map((bullet, idx) => (
-              <li key={idx} className="text-slate-400 text-sm leading-relaxed flex gap-3 font-mono">
-                <span className="text-neon-blue mt-0.5">»</span>
-                {bullet}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-wrap gap-2">
-            {exp.skills?.map(skill => (
-              <span key={skill} className="px-2 py-0.5 bg-slate-900 border border-slate-700 text-[10px] font-mono text-slate-400 uppercase tracking-wide hover:border-neon-blue hover:text-neon-blue transition-colors">
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
+        </Reveal>
       ))}
     </div>
   </section>
@@ -289,20 +328,22 @@ const Skills: React.FC = () => (
       Technical_Toolkit
     </SectionHeading>
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      {SKILLS.map((cat) => (
-        <div key={cat.category} className="space-y-4">
-          <h4 className="text-sm font-bold uppercase tracking-widest text-neon-green border-b border-neon-green/30 pb-2">
-            {cat.category}
-          </h4>
-          <div className="flex flex-col gap-2">
-            {cat.items.map(item => (
-              <div key={item} className="flex items-center gap-3 text-slate-300 font-mono text-sm">
-                <div className="w-1 h-1 bg-neon-green"></div>
-                <span>{item}</span>
-              </div>
-            ))}
+      {SKILLS.map((cat, index) => (
+        <Reveal key={cat.category} delay={index * 150}>
+          <div className="space-y-4">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-neon-green border-b border-neon-green/30 pb-2">
+              {cat.category}
+            </h4>
+            <div className="flex flex-col gap-2">
+              {cat.items.map(item => (
+                <div key={item} className="flex items-center gap-3 text-slate-300 font-mono text-sm">
+                  <div className="w-1 h-1 bg-neon-green"></div>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
       ))}
     </div>
   </section>
