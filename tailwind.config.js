@@ -37,6 +37,7 @@ export default {
         'wander-slow': "wander 30s infinite alternate ease-in-out",
         'flicker': "flicker 4s infinite",
         'neon-pulse': "neon-pulse 2s infinite ease-in-out",
+        'ripple-line': "ripple-line 4s ease-out infinite",
       },
       keyframes: {
         wander: {
@@ -136,6 +137,19 @@ export default {
           "50%": {
             opacity: 1,
             filter: "brightness(1.2)",
+          },
+        },
+        "ripple-line": {
+          "0%": {
+            transform: "scaleX(0)",
+            opacity: "0",
+          },
+          "20%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "scaleX(1)",
+            opacity: "0",
           },
         },
       },

@@ -51,10 +51,14 @@ export const CityscapeBackground: React.FC = () => {
           }}
         >
           {/* Traffic - Skyway Type */}
-          <div className="absolute top-[30%] left-[-20%] w-[140%] h-[2px] opacity-70"
-            style={{ animation: 'traffic-move 15s linear infinite', background: 'linear-gradient(90deg, transparent, #ff0000, transparent)' }}></div>
-          <div className="absolute top-[50%] left-[-20%] w-[140%] h-[2px] opacity-50"
-            style={{ animation: 'traffic-move 20s linear infinite reverse', animationDelay: '2s', background: 'linear-gradient(90deg, transparent, #ffffff, transparent)' }}></div>
+          <div className="absolute top-[30%] left-[-20%] w-[140%] h-[2px] blur-sm overflow-hidden"
+            style={{ animation: 'traffic-move 15s linear infinite', background: 'linear-gradient(90deg, transparent, #ff0000, transparent)' }}>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.9)_0%,_transparent_70%)] animate-ripple-line" />
+          </div>
+
+          <div className="absolute top-[50%] left-[-20%] w-[140%] h-[2px] opacity-30 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.9)_0%,_transparent_90%)] animate-ripple-line" style={{ animationDelay: '1s' }} />
+          </div>
 
           {/* Random Lights/Flicker */}
           <div className="absolute top-[20%] left-[20%] w-[50px] h-[50px] bg-neon-blue rounded-full opacity-20 blur-xl animate-pulse"></div>
@@ -71,8 +75,10 @@ export const CityscapeBackground: React.FC = () => {
           }}
         >
           {/* Street Traffic */}
-          <div className="absolute bottom-[20%] left-[-20%] w-[150%] h-[10px] blur-sm opacity-40"
-            style={{ animation: 'traffic-move-reverse 10s linear infinite', background: 'linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.8), transparent)' }}></div>
+          <div className="absolute bottom-[20%] left-[-20%] w-[150%] h-[10px] blur-sm opacity-40 overflow-hidden"
+            style={{ animation: 'traffic-move-reverse 10s linear infinite', background: 'linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.8), transparent)' }}>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.5)_0%,_transparent_70%)] animate-ripple-line" />
+          </div>
 
           {/* Neon Signs Flickering */}
           <div className="absolute bottom-[40%] left-[10%] w-[100px] h-[100px] bg-neon-green/30 blur-2xl animate-flicker" style={{ animationDuration: '3s' }}></div>
