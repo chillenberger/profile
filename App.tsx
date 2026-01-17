@@ -53,8 +53,8 @@ const Nav: React.FC = () => {
     <nav
       className="sticky top-0 z-40 backdrop-blur-sm transition-colors duration-300"
       style={{
-        backgroundColor: `rgba(10, 11, 14, ${opacity * 0.9})`,
-        borderBottom: `1px solid rgba(0, 243, 255, ${opacity * 0.2})`
+        backgroundColor: `rgba(10, 11, 14, ${opacity * 0.95})`,
+        borderBottom: `1px solid rgba(255, 255, 255, ${opacity * 0.05})`
       }}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -87,9 +87,6 @@ const Nav: React.FC = () => {
           <a href="https://www.linkedin.com/in/daniel-illenberger-0021094b/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" title="LinkedIn">
             <Icons.Linkedin />
           </a>
-          <a href="#contact" className="bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue border border-neon-blue px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all shadow-[0_0_10px_rgba(0,243,255,0.2)] hover:shadow-neon-blue">
-            Init_Contact
-          </a>
         </div>
       </div>
     </nav>
@@ -100,14 +97,10 @@ const Hero: React.FC = () => (
   <section id="about" className="pt-36 pb-32 px-6 max-w-6xl mx-auto">
     <div className="grid lg:grid-cols- gap-12 items-center">
       <div className="relative group max-w-xl ml-auto">
-        <div className="industrial-frame bg-cyber-black/40 backdrop-blur-xl overflow-hidden shadow-2xl relative border border-white/5 border-t-white/20">
-          {/* Frame Buttons Left */}
-          <div className="absolute left-[-22px] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
-            <div className="industrial-button">P</div>
-            <div className="industrial-button">R</div>
-            <div className="industrial-button">O</div>
-            <div className="industrial-button">G</div>
-          </div>
+        <div className="glass-panel overflow-hidden relative">
+          {/* Frame Accents */}
+          <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/20"></div>
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/20"></div>
 
           {/* Main Display Screen */}
           <div className="screen-cyan p-6 md:p-8 relative min-h-[420px] shadow-[inset_0_0_80px_rgba(0,243,255,0.05)]">
@@ -116,44 +109,31 @@ const Hero: React.FC = () => (
 
             {/* Layout Grid */}
             <div className="grid grid-cols-12 gap-6 relative z-20">
-              {/* Left Column: Bio Data */}
-              <div className="col-span-12 md:col-span-7 space-y-4">
-                <div className="bg-neon-blue/5 border-l-2 border-neon-blue p-3">
-                  <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-1">Subject_Identifier</h3>
-                  <p className="text-xl font-bold text-white tracking-tight">
+              <div className="col-span-12 md:col-span-7 space-y-6">
+                <div>
+                  <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-2 font-mono">Subject_Identifier</h3>
+                  <p className="text-2xl font-bold text-white tracking-tight">
                     <Typewriter text={wrapSnakeCaseString("DANIEL_ILLENBERGER")} delay={200} />
                   </p>
                 </div>
 
-                <div className="space-y-2 font-mono text-[10px] md:text-xs">
-                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
-                    <span className="text-slate-500 uppercase tracking-wider">Manufacture</span>
-                    <span className="text-neon-blue font-bold">
-                      <Typewriter text={wrapSnakeCaseString("HEAVY_IND")} delay={800} speed={30} />
+                <div className="space-y-3">
+                  <div className="flex justify-between border-b border-white/5 pb-2">
+                    <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Role</span>
+                    <span className="text-xs text-neon-blue font-bold">
+                      <Typewriter text={wrapSnakeCaseString("FULL_STACK_DEVELOPER")} delay={1000} speed={30} />
                     </span>
                   </div>
-                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
-                    <span className="text-slate-500 uppercase tracking-wider">Model</span>
-                    <span className="text-neon-blue font-bold">
-                      <Typewriter text={wrapSnakeCaseString("FULL_STACK_DEVELOPER")} delay={1200} speed={30} />
+                  <div className="flex justify-between border-b border-white/5 pb-2">
+                    <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Focus</span>
+                    <span className="text-xs text-white font-medium">
+                      <Typewriter text="AI IMPLEMENTATION" delay={1800} speed={30} />
                     </span>
                   </div>
-                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
-                    <span className="text-slate-500 uppercase tracking-wider">Origination</span>
-                    <span className="text-acid-yellow font-bold italic">
-                      <Typewriter text="PHYSICS / NUCLEAR" delay={2000} speed={30} />
-                    </span>
-                  </div>
-                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
-                    <span className="text-slate-500 uppercase tracking-wider">Mental_Class</span>
-                    <span className="text-neon-green">
-                      <Typewriter text={wrapSnakeCaseString("LEVEL_A_MAX")} delay={2800} speed={30} />
-                    </span>
-                  </div>
-                  <div className="flex justify-between border-b border-neon-blue/10 pb-1">
-                    <span className="text-slate-500 uppercase tracking-wider">Status</span>
-                    <span className="text-neon-green animate-pulse">
-                      <Typewriter text={wrapSnakeCaseString("DEPLOYED_BUILDING")} delay={3200} speed={30} />
+                  <div className="flex justify-between border-b border-white/5 pb-2">
+                    <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Status</span>
+                    <span className="text-xs text-neon-green font-medium">
+                      <Typewriter text={wrapSnakeCaseString("ACTIVE_LOGGED_IN")} delay={2600} speed={30} />
                     </span>
                   </div>
                 </div>
@@ -220,31 +200,17 @@ const Hero: React.FC = () => (
           </div>
         </div>
       </div>
-      {/* <div className="space-y-6">
-        <p className="text-lg text-slate-400 max-w-lg leading-relaxed font-mono">
-          Full-Stack Engineer / Startup Enthusiast <br />
-          Directives: <span className="text-neon-blue">AI Implementation</span>, <span className="text-neon-purple">Scalability</span>, <span className="text-neon-green">Performance</span>.
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <a href="#experience" className="bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue px-6 py-3 font-bold transition-all border border-neon-blue shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-neon-blue uppercase tracking-widest text-sm">
-            Access_Logs
-          </a>
-          <a href="https://github.com/chillenberger" target="_blank" rel="noreferrer" className="bg-transparent hover:bg-slate-800 text-slate-300 px-6 py-3 font-bold transition-all border border-slate-700 hover:border-slate-500 uppercase tracking-widest text-sm flex items-center gap-2">
-            <Icons.Github /> Github
-          </a>
-        </div>
-      </div> */}
     </div>
   </section>
 );
 
 const SectionHeading: React.FC<{ children: React.ReactNode; id: string; subtitle?: string }> = ({ children, id, subtitle }) => (
-  <div className="mb-24" id={id}>
-    <h2 className="text-3xl font-bold mb-4 uppercase tracking-widest text-white flex items-center gap-4 flex-wrap">
-      <span className="text-neon-blue text-2xl font-mono">0x{id.substring(0, 2).toUpperCase()}</span>
+  <div className="mb-20" id={id}>
+    <h2 className="text-2xl font-bold mb-3 uppercase tracking-[0.2em] text-white flex items-center gap-3">
+      <span className="w-8 h-[1px] bg-neon-blue/40"></span>
       {typeof children === 'string' ? wrapSnakeCase(children) : children}
     </h2>
-    {subtitle && <p className="text-slate-400 font-mono text-sm max-w-2xl border-l-2 border-neon-blue pl-4">{subtitle}</p>}
+    {subtitle && <p className="text-slate-500 font-mono text-xs max-w-2xl pl-11">{subtitle}</p>}
   </div>
 );
 
@@ -278,7 +244,7 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-2000 ${className} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      className={`transition-all duration-1000 ${className} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
     >
       <div className={isVisible ? "reveal-flicker reveal-scan" : ""}>
@@ -296,8 +262,8 @@ const Experience: React.FC = () => (
     <div className="space-y-12">
       {EXPERIENCES.map((exp) => (
         <Reveal key={exp.id}>
-          <div className="relative pl-8 border-l border-slate-800 group hover:border-neon-blue transition-colors">
-            <div className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-cyber-black border border-slate-600 group-hover:border-neon-blue group-hover:bg-neon-blue transition-colors"></div>
+          <div className="relative pl-10 border-l border-white/5 group hover:border-neon-blue/30 transition-colors">
+            <div className="absolute -left-[3px] top-0 w-1.5 h-1.5 bg-cyber-black border border-white/20 group-hover:bg-neon-blue group-hover:border-neon-blue transition-all"></div>
             <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
               <div>
                 <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors uppercase tracking-wider">{exp.role}</h3>
@@ -336,9 +302,9 @@ const Projects: React.FC = () => (
     </SectionHeading>
     <div className="grid md:grid-cols-2 gap-8">
       {PROJECTS.map((project) => (
-        <div key={project.name} className="bg-cyber-black/80 backdrop-blur-sm border border-slate-800 p-8 hover:bg-slate-900/30 transition-all group flex flex-col h-full shadow-lg hover:shadow-neon-purple hover:border-neon-purple/50">
+        <div key={project.name} className="glass-panel p-8 group flex flex-col h-full hover:border-neon-purple/30 transition-all">
           <div className="flex justify-between items-start mb-6">
-            <h3 className="text-2xl font-bold uppercase tracking-wider text-neon-purple text-shadow-purple">{project.name}</h3>
+            <h3 className="text-xl font-bold uppercase tracking-wider text-white group-hover:text-neon-purple transition-colors">{project.name}</h3>
             {project.github && (
               <a href={project.github} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-neon-purple transition-colors">
                 <Icons.Github />
@@ -383,8 +349,8 @@ const Skills: React.FC = () => (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {SKILLS.map((cat, index) => (
         <Reveal key={cat.category} delay={index * 150}>
-          <div className="space-y-4">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-neon-green border-b border-neon-green/30 pb-2">
+          <div className="space-y-5">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-neon-green/60 border-b border-white/5 pb-3 font-mono">
               {cat.category}
             </h4>
             <div className="flex flex-col gap-2">
@@ -409,8 +375,8 @@ const Education: React.FC = () => (
     </SectionHeading>
     <div className="grid md:grid-cols-2 gap-8">
       {EDUCATION.map((edu) => (
-        <div key={edu.school} className="bg-cyber-black/80 backdrop-blur-sm border border-slate-800 p-8 shadow-lg hover:border-neon-blue/40 transition-colors">
-          <span className="text-neon-blue font-mono text-sm border border-neon-blue/20 px-2 py-0.5 bg-neon-blue/5">{edu.period}</span>
+        <div key={edu.school} className="glass-panel p-8 hover:border-neon-blue/30 transition-all">
+          <span className="text-neon-blue font-mono text-[10px] uppercase tracking-widest bg-neon-blue/5 px-2 py-0.5 border border-neon-blue/20">{edu.period}</span>
           <h3 className="text-xl font-bold mt-4 text-white uppercase tracking-wide">{edu.degree}</h3>
           <p className="text-slate-400 mb-1 font-mono">{edu.school}</p>
           <p className="text-slate-500 text-xs font-mono mb-4">{edu.location}</p>
@@ -426,18 +392,18 @@ const Education: React.FC = () => (
 );
 
 const Footer: React.FC = () => (
-  <footer id="contact" className="py-12 border-t border-slate-900 px-6 bg-cyber-black/50 backdrop-blur-sm">
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-      <div className="text-center md:text-left">
-        <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-white">{wrapSnakeCase("Initialize_Connection")}</h3>
-        <p className="text-slate-400 font-mono text-sm">Open for senior engineering roles & interesting projects.</p>
-        <p className="text-neon-blue mt-2 font-mono text-sm">dan.overpass519@passinbox.com</p>
+  <footer id="contact" className="py-20 border-t border-white/5 bg-cyber-black/50 backdrop-blur-sm">
+    <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 px-6">
+      <div className="max-w-md">
+        <h3 className="text-2xl font-bold mb-4 uppercase tracking-[0.2em] text-white">Initialize_Connection</h3>
+        <p className="text-slate-500 text-sm leading-relaxed mb-6">Open for senior engineering roles & interesting projects that push the boundaries of technology.</p>
+        <p className="text-neon-blue font-mono text-xs tracking-wider">DAN.OVERPASS519@PASSINBOX.COM</p>
       </div>
       <div className="flex gap-4">
-        <a href="mailto:dan.overpass519@passinbox.com" className="bg-neon-blue/10 hover:bg-neon-blue/20 px-6 py-3 font-bold transition-all text-neon-blue border border-neon-blue uppercase tracking-widest text-sm shadow-[0_0_10px_rgba(0,243,255,0.1)] hover:shadow-neon-blue">
-          Email_Me
+        <a href="mailto:dan.overpass519@passinbox.com" className="bg-neon-blue/10 hover:bg-neon-blue/20 px-8 py-3 font-bold transition-all text-neon-blue border border-neon-blue/30 uppercase tracking-[0.2em] text-[10px] shadow-[0_0_15px_rgba(0,243,255,0.05)] hover:shadow-neon-blue">
+          Send_Message
         </a>
-        <a href="https://www.linkedin.com/in/daniel-illenberger-0021094b/" target="_blank" rel="noreferrer" className="bg-transparent hover:bg-slate-800 px-6 py-3 font-bold border border-slate-700 hover:border-slate-500 transition-all text-white uppercase tracking-widest text-sm">
+        <a href="https://www.linkedin.com/in/daniel-illenberger-0021094b/" target="_blank" rel="noreferrer" className="bg-white/5 hover:bg-white/10 px-8 py-3 font-bold border border-white/10 hover:border-white/20 transition-all text-white uppercase tracking-[0.2em] text-[10px]">
           LinkedIn
         </a>
       </div>
@@ -506,7 +472,7 @@ const BlogPage: React.FC = () => {
       </div>
       <div className="lg:w-2/3 min-h-[500px]">
         {activePost ? (
-          <article className="bg-cyber-black/40 border border-slate-800 p-8 md:p-12 animate-fade-in-up relative overflow-hidden">
+          <article className="glass-panel p-8 md:p-12 animate-fade-in-up relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-20">
               <Icons.Github /> {/* Placeholder for a decorative icon */}
             </div>

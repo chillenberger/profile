@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply font-mono;
+    @apply font-sans antialiased;
   }
 }
 
@@ -61,6 +61,14 @@
     z-index: 10;
     animation: scan-reveal 1.2s ease-in-out forwards;
   }
+
+  .glass-panel {
+    @apply bg-cyber-black/40 backdrop-blur-xl border border-white/5 border-t-white/10 shadow-2xl;
+  }
+
+  .industrial-button {
+    @apply w-6 h-6 flex items-center justify-center text-[8px] font-bold border border-white/10 bg-white/5 text-white/40 hover:text-neon-blue hover:border-neon-blue/50 transition-all cursor-crosshair;
+  }
 }
 
 @keyframes flicker-on {
@@ -109,6 +117,20 @@
   }
 }
 
+@keyframes fog-drift {
+  0% {
+    transform: translate(-5%, -5%) scale(1);
+  }
+
+  50% {
+    transform: translate(5%, 5%) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-5%, -5%) scale(1);
+  }
+}
+
 @keyframes flicker {
 
   0%,
@@ -130,8 +152,28 @@
   65%,
   69.999% {
     opacity: 0.4;
-    text-shadow: none;
   }
+}
+
+@keyframes cloud-billow {
+  0% {
+    transform: translate(-10%, -5%) scale(1) rotate(0deg);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: translate(10%, 5%) scale(1.1) rotate(2deg);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(-10%, -5%) scale(1) rotate(0deg);
+    opacity: 0.2;
+  }
+}
+
+.cloud-puff {
+  @apply bg-white/10 blur-[60px] rounded-full absolute mix-blend-screen pointer-events-none;
 }
 
 
