@@ -4,11 +4,11 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
   return (
     <div className={`relative w-24 h-24 flex items-center justify-center ${className}`}>
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-neon-blue/10 blur-xl rounded-full animate-pulse-glow"></div>
+      <div className="absolute inset-0 bg-neon-blue/20 blur-xl rounded-full animate-pulse-glow"></div>
 
       <svg
         viewBox="0 0 100 100"
-        className="w-full h-full relative z-10 neon-blue-glow overflow-visible opacity-40 group-hover:opacity-100 transition-opacity duration-300"
+        className="w-full h-full relative z-10 overflow-visible opacity-45 group-hover:opacity-100 transition-opacity duration-300"
       >
         <defs>
           <filter id="glitch-filter">
@@ -28,6 +28,28 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
           </filter>
         </defs>
 
+        {/* Glitch Artifacts */}
+        <rect
+          x="10" y="20" width="10" height="2"
+          fill="#00f3ff"
+          className="animate-glitch-artifact [animation-delay:-1s]"
+        />
+        <rect
+          x="70" y="60" width="15" height="1"
+          fill="#ff00ff"
+          className="animate-glitch-artifact [animation-delay:-2.5s]"
+        />
+        <rect
+          x="30" y="85" width="20" height="1"
+          fill="#ffffff"
+          className="animate-glitch-artifact [animation-delay:-0.5s]"
+        />
+        <line
+          x1="15" y1="50" x2="35" y2="50"
+          stroke="#00f3ff" strokeWidth="0.5"
+          className="animate-glitch-artifact [animation-delay:-3s]"
+        />
+
         {/* Main Triangle */}
         <path
           d="M50 15 L85 80 L15 80 Z"
@@ -35,27 +57,33 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
           stroke="#00f3ff"
           strokeWidth="2"
           strokeLinejoin="miter"
-          className="animate-flicker"
+          className="animate-flicker opacity-80"
         />
 
-        {/* Glitch Layers */}
+        {/* Glitch Layers/Artifacts */}
         <path
           d="M50 15 L85 80 L15 80 Z"
           fill="none"
           stroke="#00f3ff"
           strokeWidth="0.5"
-          strokeLinejoin="miter"
           className="animate-glitch-fast opacity-30"
-          style={{ clipPath: 'inset(0 0 60% 0)' }}
+          style={{ clipPath: 'inset(0 0 60% 0)', transform: 'translateX(-5px)' }}
         />
         <path
           d="M50 15 L85 80 L15 80 Z"
           fill="none"
-          stroke="#00f3ff"
+          stroke="#ff00ff"
           strokeWidth="0.5"
-          strokeLinejoin="miter"
+          className="animate-glitch-horizontal opacity-20"
+          style={{ clipPath: 'inset(40% 0 40% 0)', transform: 'translateX(10px)' }}
+        />
+        <path
+          d="M50 15 L85 80 L15 80 Z"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="1"
           className="animate-glitch-vertical opacity-30"
-          style={{ clipPath: 'inset(60% 0 0 0)' }}
+          style={{ clipPath: 'inset(60% 0 0 0)', transform: 'translateX(-10px)' }}
         />
 
         {/* Interior Scanlines */}
@@ -70,7 +98,7 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
       </svg>
 
       {/* Center Label */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mt-4 opacity-50 group-hover:opacity-100 transition-opacity">
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
         <span className="text-[7px] font-bold text-neon-blue tracking-tighter animate-flicker leading-none">AI_CORE</span>
         <span className="text-[5px] font-mono text-white/20 tracking-[0.2em] leading-none">ACTIVE</span>
       </div>

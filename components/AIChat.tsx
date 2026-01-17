@@ -105,7 +105,6 @@ const AIChat: React.FC = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="relative group"
       >
-        <div className="absolute inset-0 bg-neon-blue opacity-0 group-hover:opacity-40 blur-2xl rounded-full transition-opacity duration-300 animate-pulse"></div>
         <div className="relative w-32 h-32 flex items-center justify-center">
           <GlitchTriangle className="w-full h-full" />
         </div>

@@ -78,10 +78,10 @@ export default {
         },
         'pulse-glow': {
           "0%, 100%": {
-            opacity: 0.1,
+            opacity: 0.03,
           },
           "50%": {
-            opacity: 0.4,
+            opacity: 0.08,
           },
         },
         tilt: {
