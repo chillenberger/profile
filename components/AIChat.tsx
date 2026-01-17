@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { askGeminiAboutDaniel } from '../services/geminiService';
 import { Icons } from '../constants';
+import GlitchTriangle from './GlitchTriangle';
 
 const AIChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -106,17 +107,7 @@ const AIChat: React.FC = () => {
       >
         <div className="absolute inset-0 bg-neon-blue opacity-0 group-hover:opacity-40 blur-2xl rounded-full transition-opacity duration-300 animate-pulse"></div>
         <div className="relative w-32 h-32 flex items-center justify-center">
-          <img
-            src="/holographic-neuron.png"
-            alt="Neural Interface"
-            data-testid="chat-icon"
-            className="w-full h-full object-contain opacity-60 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_15px_rgba(0,243,255,0.5)]"
-          />
-          {/* {!isOpen && (
-            <div className="absolute top-4 right-4 bg-neon-blue border border-white text-black text-[10px] font-bold px-1.5 py-0.5 animate-bounce shadow-[0_0_10px_rgba(0,243,255,0.5)] z-20">
-              QUERY
-            </div>
-          )} */}
+          <GlitchTriangle className="w-full h-full" />
         </div>
       </button>
     </div>
