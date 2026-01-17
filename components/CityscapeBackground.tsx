@@ -89,7 +89,7 @@ export const CityscapeBackground: React.FC = () => {
       </div>
 
       {/* ASYMMETRIC ARCHITECTURAL OVERLAY - A single large solid panel to break symmetry without framing */}
-      <div className="absolute top-0 bottom-0 left-0 w-[40%] bg-cyber-black/50 backdrop-blur-[2px] border-r border-white/20 z-[2] hidden lg:block"></div>
+      <div className="absolute top-0 bottom-0 left-0 w-[40%] bg-cyber-black/60 backdrop-blur-[2px] border-r border-white/20 z-[2] hidden lg:block"></div>
 
       {/* Global Overlays - Lightened for better visibility */}
       <div className="absolute inset-0 bg-[#050505]/40 mix-blend-multiply z-[1]"></div>

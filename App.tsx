@@ -5,6 +5,7 @@ import { EXPERIENCES, EDUCATION, PROJECTS, SKILLS, BLOG_POSTS, Icons } from './c
 import AIChat from './components/AIChat';
 import { CityscapeBackground } from './components/CityscapeBackground';
 import { Typewriter } from './components/Typewriter';
+import { ProfileScanner } from './components/ProfileScanner';
 
 
 
@@ -95,7 +96,7 @@ const Nav: React.FC = () => {
 
 const Hero: React.FC = () => (
   <section id="about" className="pt-36 pb-32 px-6 max-w-6xl mx-auto">
-    <div className="grid lg:grid-cols- gap-12 items-center">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
       <div className="relative group max-w-xl ml-auto">
         <div className="glass-panel overflow-hidden relative">
           {/* Frame Accents */}
@@ -150,24 +151,7 @@ const Hero: React.FC = () => (
 
               {/* Right Column: Scan Visual */}
               <div className="col-span-12 md:col-span-5 space-y-4">
-                <div className="aspect-[4/5] border border-neon-blue/30 bg-neon-blue/5 relative overflow-hidden group/scan shadow-inner">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/10 to-transparent animate-scan-y"></div>
-                  {/* Decorative Scan Brackets */}
-                  <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-neon-blue/60"></div>
-                  <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-neon-blue/60"></div>
-                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-neon-blue/60"></div>
-                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-neon-blue/60"></div>
-
-                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                    <div className="w-24 h-24 border-2 border-neon-blue rounded-full scale-110 animate-ping"></div>
-                  </div>
-
-                  {/* Mock Fingerprint/Profile Scan */}
-                  <div
-                    className="absolute inset-4 opacity-70 mix-blend-screen bg-contain bg-center bg-no-repeat"
-                    style={{ backgroundImage: "url('/hologram_man.png')" }}
-                  ></div>
-                </div>
+                <ProfileScanner />
 
                 <div className="p-2 border border-neon-purple/20 bg-neon-purple/5 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-neon-purple/40"></div>
@@ -178,23 +162,23 @@ const Hero: React.FC = () => (
                   </p>
                 </div>
               </div>
-            </div>
 
-            {/* Bottom Status Info */}
-            <div className="mt-8 pt-4 border-t border-neon-blue/20 flex justify-between items-end relative z-20">
-              <div className="flex gap-4">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-neon-green rounded-full shadow-[0_0_8px_#0aff0a]"></div>
-                  <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Link_Established</span>
+              {/* Bottom Status Info */}
+              <div className="mt-8 pt-4 border-t border-neon-blue/20 flex justify-between items-end relative z-20">
+                <div className="flex gap-4">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 bg-neon-green rounded-full shadow-[0_0_8px_#0aff0a]"></div>
+                    <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Link_Established</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 bg-neon-purple/40 rounded-full"></div>
+                    <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Enc_V4.2</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-neon-purple/40 rounded-full"></div>
-                  <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Enc_V4.2</span>
+                <div className="text-right">
+                  <div className="text-[12px] font-bold text-neon-blue tracking-tighter leading-none font-mono">0x4F.2A.99.1</div>
+                  <div className="text-[6px] text-slate-600 uppercase tracking-[0.3em] mt-1">Sector_Coordinates</div>
                 </div>
-              </div>
-              <div className="text-right">
-                <div className="text-[12px] font-bold text-neon-blue tracking-tighter leading-none font-mono">0x4F.2A.99.1</div>
-                <div className="text-[6px] text-slate-600 uppercase tracking-[0.3em] mt-1">Sector_Coordinates</div>
               </div>
             </div>
           </div>
@@ -395,7 +379,7 @@ const Footer: React.FC = () => (
   <footer id="contact" className="py-20 border-t border-white/5 bg-cyber-black/50 backdrop-blur-sm">
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 px-6">
       <div className="max-w-md">
-        <h3 className="text-2xl font-bold mb-4 uppercase tracking-[0.2em] text-white">Initialize_Connection</h3>
+        <h3 className="text-2xl font-bold mb-4 uppercase tracking-[0.2em] text-white">{wrapSnakeCase("Initialize_Connection")}</h3>
         <p className="text-slate-500 text-sm leading-relaxed mb-6">Open for senior engineering roles & interesting projects that push the boundaries of technology.</p>
         <p className="text-neon-blue font-mono text-xs tracking-wider">DAN.OVERPASS519@PASSINBOX.COM</p>
       </div>
