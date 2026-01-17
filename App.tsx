@@ -4,8 +4,23 @@ import { Routes, Route, Link, useNavigate, useParams, useLocation } from 'react-
 import { EXPERIENCES, EDUCATION, PROJECTS, SKILLS, BLOG_POSTS, Icons } from './constants';
 import AIChat from './components/AIChat';
 import { CityscapeBackground } from './components/CityscapeBackground';
+import { Typewriter } from './components/Typewriter';
 
 
+
+const wrapSnakeCaseString = (text: string) => {
+  if (typeof text !== 'string') return text;
+  return text.replace(/_/g, '_\u200B');
+};
+
+const wrapSnakeCase = (text: string) => {
+  if (typeof text !== 'string') return text;
+  return text.split('_').map((part, i, arr) => (
+    <React.Fragment key={i}>
+      {part}{i < arr.length - 1 && <><wbr />_</>}
+    </React.Fragment>
+  ));
+};
 
 const Nav: React.FC = () => {
   const location = useLocation();
@@ -105,29 +120,41 @@ const Hero: React.FC = () => (
               <div className="col-span-12 md:col-span-7 space-y-4">
                 <div className="bg-neon-blue/5 border-l-2 border-neon-blue p-3">
                   <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-1">Subject_Identifier</h3>
-                  <p className="text-xl font-bold text-white tracking-tight">DANIEL_ILLENBERGER</p>
+                  <p className="text-xl font-bold text-white tracking-tight">
+                    <Typewriter text={wrapSnakeCaseString("DANIEL_ILLENBERGER")} delay={200} />
+                  </p>
                 </div>
 
                 <div className="space-y-2 font-mono text-[10px] md:text-xs">
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Manufacture</span>
-                    <span className="text-neon-blue font-bold"> HEAVY_IND</span>
+                    <span className="text-neon-blue font-bold">
+                      <Typewriter text={wrapSnakeCaseString("HEAVY_IND")} delay={800} speed={30} />
+                    </span>
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Model</span>
-                    <span className="text-neon-blue font-bold">FULL_STACK_DEVELOPER</span>
+                    <span className="text-neon-blue font-bold">
+                      <Typewriter text={wrapSnakeCaseString("FULL_STACK_DEVELOPER")} delay={1200} speed={30} />
+                    </span>
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Origination</span>
-                    <span className="text-acid-yellow font-bold italic">PHYSICS / NUCLEAR</span>
+                    <span className="text-acid-yellow font-bold italic">
+                      <Typewriter text="PHYSICS / NUCLEAR" delay={2000} speed={30} />
+                    </span>
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Mental_Class</span>
-                    <span className="text-neon-green">LEVEL_A_MAX</span>
+                    <span className="text-neon-green">
+                      <Typewriter text={wrapSnakeCaseString("LEVEL_A_MAX")} delay={2800} speed={30} />
+                    </span>
                   </div>
                   <div className="flex justify-between border-b border-neon-blue/10 pb-1">
                     <span className="text-slate-500 uppercase tracking-wider">Status</span>
-                    <span className="text-neon-green animate-pulse">DEPLOYED_BUILDING</span>
+                    <span className="text-neon-green animate-pulse">
+                      <Typewriter text={wrapSnakeCaseString("DEPLOYED_BUILDING")} delay={3200} speed={30} />
+                    </span>
                   </div>
                 </div>
 
@@ -165,9 +192,9 @@ const Hero: React.FC = () => (
                 <div className="p-2 border border-neon-purple/20 bg-neon-purple/5 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-neon-purple/40"></div>
                   <p className="text-[8px] font-mono text-neon-purple leading-tight opacity-70 tracking-tighter">
-                    SYSTEM_AUTH: VALIDATED<br />
-                    REPLICANT_DETECT: NEGATIVE<br />
-                    DECRYPTION: ACTIVE...
+                    <Typewriter text="SYSTEM_AUTH: VALIDATED" delay={4000} speed={20} /><br />
+                    <Typewriter text="REPLICANT_DETECT: NEGATIVE" delay={4500} speed={20} /><br />
+                    <Typewriter text="DECRYPTION: ACTIVE..." delay={5000} speed={20} />
                   </p>
                 </div>
               </div>
@@ -213,9 +240,9 @@ const Hero: React.FC = () => (
 
 const SectionHeading: React.FC<{ children: React.ReactNode; id: string; subtitle?: string }> = ({ children, id, subtitle }) => (
   <div className="mb-24" id={id}>
-    <h2 className="text-3xl font-bold mb-4 uppercase tracking-widest text-white flex items-center gap-4">
+    <h2 className="text-3xl font-bold mb-4 uppercase tracking-widest text-white flex items-center gap-4 flex-wrap">
       <span className="text-neon-blue text-2xl font-mono">0x{id.substring(0, 2).toUpperCase()}</span>
-      {children}
+      {typeof children === 'string' ? wrapSnakeCase(children) : children}
     </h2>
     {subtitle && <p className="text-slate-400 font-mono text-sm max-w-2xl border-l-2 border-neon-blue pl-4">{subtitle}</p>}
   </div>
@@ -402,7 +429,7 @@ const Footer: React.FC = () => (
   <footer id="contact" className="py-12 border-t border-slate-900 px-6 bg-cyber-black/50 backdrop-blur-sm">
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div className="text-center md:text-left">
-        <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-white">Initialize_Connection</h3>
+        <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-white">{wrapSnakeCase("Initialize_Connection")}</h3>
         <p className="text-slate-400 font-mono text-sm">Open for senior engineering roles & interesting projects.</p>
         <p className="text-neon-blue mt-2 font-mono text-sm">dan.overpass519@passinbox.com</p>
       </div>
