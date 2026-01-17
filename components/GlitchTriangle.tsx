@@ -4,7 +4,7 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
   return (
     <div className={`relative w-24 h-24 flex items-center justify-center ${className}`}>
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-neon-blue/20 blur-xl rounded-full animate-pulse-glow"></div>
+      <div className="absolute inset-0 bg-neon-blue/40 blur-xl rounded-full animate-pulse-glow"></div>
 
       <svg
         viewBox="0 0 100 100"
@@ -46,7 +46,7 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
         />
         <line
           x1="15" y1="50" x2="35" y2="50"
-          stroke="#00f3ff" strokeWidth="0.5"
+          stroke="#00f3ff" strokeWidth="1"
           className="animate-glitch-artifact [animation-delay:-3s]"
         />
 
@@ -65,7 +65,7 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
           d="M50 15 L85 80 L15 80 Z"
           fill="none"
           stroke="#00f3ff"
-          strokeWidth="0.5"
+          strokeWidth="1"
           className="animate-glitch-fast opacity-30"
           style={{ clipPath: 'inset(0 0 60% 0)', transform: 'translateX(-5px)' }}
         />
@@ -73,27 +73,27 @@ const GlitchTriangle: React.FC<{ className?: string }> = ({ className = "" }) =>
           d="M50 15 L85 80 L15 80 Z"
           fill="none"
           stroke="#ff00ff"
-          strokeWidth="0.5"
-          className="animate-glitch-horizontal opacity-20"
+          strokeWidth="1"
+          className="animate-glitch-horizontal opacity-40"
           style={{ clipPath: 'inset(40% 0 40% 0)', transform: 'translateX(10px)' }}
         />
         <path
           d="M50 15 L85 80 L15 80 Z"
           fill="none"
           stroke="#ffffff"
-          strokeWidth="1"
-          className="animate-glitch-vertical opacity-30"
+          strokeWidth="2"
+          className="animate-glitch-vertical opacity-60"
           style={{ clipPath: 'inset(60% 0 0 0)', transform: 'translateX(-10px)' }}
         />
 
         {/* Interior Scanlines */}
         <pattern id="scanlines" width="100" height="4" patternUnits="userSpaceOnUse">
-          <line x1="0" y1="0" x2="100" y2="0" stroke="#00f3ff" strokeWidth="0.5" opacity="0.1" />
+          <line x1="0" y1="0" x2="100" y2="0" stroke="#00f3ff" strokeWidth="1" opacity="0.4" />
         </pattern>
         <path
           d="M50 15 L85 80 L15 80 Z"
           fill="url(#scanlines)"
-          className="opacity-20"
+          className="opacity-40"
         />
       </svg>
 
