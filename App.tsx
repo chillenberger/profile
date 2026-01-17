@@ -100,7 +100,7 @@ const Hero: React.FC = () => (
   <section id="about" className="pt-36 pb-32 px-6 max-w-6xl mx-auto">
     <div className="grid lg:grid-cols- gap-12 items-center">
       <div className="relative group max-w-xl ml-auto">
-        <div className="industrial-frame bg-cyber-black/80 overflow-hidden shadow-2xl relative">
+        <div className="industrial-frame bg-cyber-black/40 backdrop-blur-xl overflow-hidden shadow-2xl relative border border-white/5 border-t-white/20">
           {/* Frame Buttons Left */}
           <div className="absolute left-[-22px] top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
             <div className="industrial-button">P</div>
@@ -110,7 +110,7 @@ const Hero: React.FC = () => (
           </div>
 
           {/* Main Display Screen */}
-          <div className="screen-cyan p-6 md:p-8 relative min-h-[420px]">
+          <div className="screen-cyan p-6 md:p-8 relative min-h-[420px] shadow-[inset_0_0_80px_rgba(0,243,255,0.05)]">
             {/* CRT Effect Overlay */}
             <div className="crt-overlay absolute inset-0 opacity-10 pointer-events-none z-30"></div>
 
