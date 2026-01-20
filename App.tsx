@@ -6,6 +6,9 @@ import AIChat from './components/AIChat';
 import { CityscapeBackground } from './components/CityscapeBackground';
 import { Typewriter } from './components/Typewriter';
 import { ProfileScanner } from './components/ProfileScanner';
+import { ProfileCard } from './components/ProfileCard';
+import { JobAnalyzer } from './components/JobAnalyzer';
+import { analyzeJobDescription, AnalysisResults } from './services/geminiService';
 
 
 
@@ -94,99 +97,26 @@ const Nav: React.FC = () => {
   );
 };
 
-const Hero: React.FC = () => (
-  <section id="about" className="pt-36 pb-32 px-6 max-w-6xl mx-auto">
-    <div className="grid lg:grid-cols-2 gap-12 items-center">
-      <div className="relative group max-w-xl ml-auto">
-        <div className="glass-panel overflow-hidden relative">
-          {/* Frame Accents */}
-          <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/20"></div>
-          <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/20"></div>
+interface HeroProps {
+  onAnalyze: (jobDesc: string) => void;
+  analysisResults: AnalysisResults | null;
+  isAnalyzing: boolean;
+}
 
-          {/* Main Display Screen */}
-          <div className="screen-cyan p-6 md:p-8 relative min-h-[420px] shadow-[inset_0_0_80px_rgba(0,243,255,0.05)]">
-            {/* CRT Effect Overlay */}
-            <div className="crt-overlay absolute inset-0 opacity-10 pointer-events-none z-30"></div>
-
-            {/* Layout Grid */}
-            <div className="grid grid-cols-12 gap-6 relative z-20">
-              <div className="col-span-12 md:col-span-7 space-y-6">
-                <div>
-                  <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-2 font-mono">Subject_Identifier</h3>
-                  <p className="text-2xl font-bold text-white tracking-tight">
-                    <Typewriter text={wrapSnakeCaseString("DANIEL_ILLENBERGER")} delay={200} />
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex justify-between border-b border-white/5 pb-2">
-                    <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Role</span>
-                    <span className="text-xs text-neon-blue font-bold">
-                      <Typewriter text={wrapSnakeCaseString("FULL_STACK_DEVELOPER")} delay={1000} speed={30} />
-                    </span>
-                  </div>
-                  <div className="flex justify-between border-b border-white/5 pb-2">
-                    <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Focus</span>
-                    <span className="text-xs text-white font-medium">
-                      <Typewriter text="AI IMPLEMENTATION" delay={1800} speed={30} />
-                    </span>
-                  </div>
-                  <div className="flex justify-between border-b border-white/5 pb-2">
-                    <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Status</span>
-                    <span className="text-xs text-neon-green font-medium">
-                      <Typewriter text={wrapSnakeCaseString("ACTIVE_LOGGED_IN")} delay={2600} speed={30} />
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <div className="flex gap-1">
-                    {[...Array(12)].map((_, i) => (
-                      <div key={i} className={`h-1.5 flex-1 ${i < 9 ? 'bg-neon-blue/80 shadow-[0_0_5px_rgba(0,243,255,0.4)]' : 'bg-slate-800'}`}></div>
-                    ))}
-                  </div>
-                  <p className="text-[8px] text-slate-500 mt-2 tracking-[0.2em] uppercase">Neural_Sync_Established: 87.4%</p>
-                </div>
-              </div>
-
-              {/* Right Column: Scan Visual */}
-              <div className="col-span-12 md:col-span-5 space-y-4">
-                <ProfileScanner />
-
-                <div className="p-2 border border-neon-purple/20 bg-neon-purple/5 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-neon-purple/40"></div>
-                  <p className="text-[8px] font-mono text-neon-purple leading-tight opacity-70 tracking-tighter">
-                    <Typewriter text="SYSTEM_AUTH: VALIDATED" delay={4000} speed={20} /><br />
-                    <Typewriter text="REPLICANT_DETECT: NEGATIVE" delay={4500} speed={20} /><br />
-                    <Typewriter text="DECRYPTION: ACTIVE..." delay={5000} speed={20} />
-                  </p>
-                </div>
-              </div>
-
-              {/* Bottom Status Info */}
-              <div className="mt-8 pt-4 border-t border-neon-blue/20 flex justify-between items-end relative z-20">
-                <div className="flex gap-4">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 bg-neon-green rounded-full shadow-[0_0_8px_#0aff0a]"></div>
-                    <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Link_Established</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 bg-neon-purple/40 rounded-full"></div>
-                    <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Enc_V4.2</span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-[12px] font-bold text-neon-blue tracking-tighter leading-none font-mono">0x4F.2A.99.1</div>
-                  <div className="text-[6px] text-slate-600 uppercase tracking-[0.3em] mt-1">Sector_Coordinates</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+const Hero: React.FC<HeroProps> = ({ onAnalyze, analysisResults, isAnalyzing }) => {
+  return (
+    <section id="about" className="pt-36 pb-32 px-6 max-w-6xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-12 items-center lg:max-w-full max-w-[30rem] mx-auto">
+        <ProfileCard />
+        <JobAnalyzer
+          onAnalyze={onAnalyze}
+          isAnalyzing={isAnalyzing}
+          analysisResults={analysisResults}
+        />
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const SectionHeading: React.FC<{ children: React.ReactNode; id: string; subtitle?: string }> = ({ children, id, subtitle }) => (
   <div className="mb-20" id={id}>
@@ -238,7 +168,7 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
   );
 };
 
-const Experience: React.FC = () => (
+const Experience: React.FC<{ highlightedIds?: string[] }> = ({ highlightedIds = [] }) => (
   <section id="experience" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="experience" subtitle="Professional employment history log.">
       Experience_Log
@@ -246,7 +176,7 @@ const Experience: React.FC = () => (
     <div className="space-y-12">
       {EXPERIENCES.map((exp) => (
         <Reveal key={exp.id}>
-          <div className="relative pl-10 border-l border-white/5 group hover:border-neon-blue/30 transition-colors">
+          <div className={`relative pl-10 border-l border-white/5 group hover:border-neon-blue/30 transition-all duration-500 ${highlightedIds.includes(exp.id) ? 'matched-item-highlight' : ''}`}>
             <div className="absolute -left-[3px] top-0 w-1.5 h-1.5 bg-cyber-black border border-white/20 group-hover:bg-neon-blue group-hover:border-neon-blue transition-all"></div>
             <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
               <div>
@@ -279,14 +209,14 @@ const Experience: React.FC = () => (
   </section>
 );
 
-const Projects: React.FC = () => (
+const Projects: React.FC<{ highlightedNames?: string[] }> = ({ highlightedNames = [] }) => (
   <section id="projects" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="projects" subtitle="Selected side projects and technical deep-dives.">
       Project_Database
     </SectionHeading>
     <div className="grid md:grid-cols-2 gap-8">
       {PROJECTS.map((project) => (
-        <div key={project.name} className="glass-panel p-8 group flex flex-col h-full hover:border-neon-purple/30 transition-all">
+        <div key={project.name} className={`glass-panel p-8 group flex flex-col h-full hover:border-neon-purple/30 transition-all duration-500 ${highlightedNames.includes(project.name) ? 'matched-item-highlight' : ''}`}>
           <div className="flex justify-between items-start mb-6">
             <h3 className="text-xl font-bold uppercase tracking-wider text-white group-hover:text-neon-purple transition-colors">{project.name}</h3>
             {project.github && (
@@ -325,7 +255,7 @@ const Projects: React.FC = () => (
   </section>
 );
 
-const Skills: React.FC = () => (
+const Skills: React.FC<{ highlightedSkills?: string[] }> = ({ highlightedSkills = [] }) => (
   <section id="skills" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="skills" subtitle="My core stack and specialized competencies.">
       Technical_Toolkit
@@ -339,8 +269,8 @@ const Skills: React.FC = () => (
             </h4>
             <div className="flex flex-col gap-2">
               {cat.items.map(item => (
-                <div key={item} className="flex items-center gap-3 text-slate-300 font-mono text-sm">
-                  <div className="w-1 h-1 bg-neon-green"></div>
+                <div key={item} className={`flex items-center gap-3 text-slate-300 font-mono text-sm p-1 transition-all duration-500 ${highlightedSkills.includes(item) ? 'text-neon-green font-bold shadow-[0_0_10px_rgba(10,255,10,0.2)]' : ''}`}>
+                  <div className={`w-1 h-1 ${highlightedSkills.includes(item) ? 'bg-neon-green shadow-[0_0_5px_#0aff0a]' : 'bg-neon-green'}`}></div>
                   <span>{item}</span>
                 </div>
               ))}
@@ -401,6 +331,8 @@ const Footer: React.FC = () => (
 const Home: React.FC = () => {
   // Handle processing scroll for hash links on initial load
   const location = useLocation();
+  const [analysisResults, setAnalysisResults] = React.useState<AnalysisResults | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = React.useState(false);
 
   useEffect(() => {
     if (location.hash) {
@@ -411,12 +343,28 @@ const Home: React.FC = () => {
     }
   }, [location]);
 
+  const handleAnalyze = async (jobDesc: string) => {
+    setIsAnalyzing(true);
+    try {
+      const results = await analyzeJobDescription(jobDesc, { EXPERIENCES, PROJECTS, SKILLS });
+      setAnalysisResults(results);
+    } catch (error) {
+      console.error("Error during analysis:", error);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   return (
     <>
-      <Hero />
-      <Experience />
-      <Projects />
-      <Skills />
+      <Hero
+        onAnalyze={handleAnalyze}
+        analysisResults={analysisResults}
+        isAnalyzing={isAnalyzing}
+      />
+      <Experience highlightedIds={analysisResults?.highlightedExpIds} />
+      <Projects highlightedNames={analysisResults?.highlightedProjectNames} />
+      <Skills highlightedSkills={analysisResults?.highlightedSkillNames} />
       <Education />
       <Footer />
     </>

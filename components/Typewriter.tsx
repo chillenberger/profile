@@ -5,6 +5,7 @@ interface TypewriterProps {
   delay?: number;
   speed?: number;
   className?: string;
+  cursorClassName?: string;
   onComplete?: () => void;
 }
 
@@ -13,6 +14,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
   delay = 0,
   speed = 40,
   className = "",
+  cursorClassName = "bg-neon-blue",
   onComplete
 }) => {
   const [displayedText, setDisplayedText] = useState("");
@@ -47,10 +49,10 @@ export const Typewriter: React.FC<TypewriterProps> = ({
       </span>
 
       {/* Absolute overlay for the typing animation */}
-      <span className="absolute top-0 left-0">
+      <span className="absolute top-0 left-0 w-full h-full">
         {displayedText}
         {started && displayedText.length < text.length && (
-          <span className="inline-block w-[2px] h-[1em] bg-neon-blue animate-pulse ml-0.5 align-middle" />
+          <span className={`inline-block w-[2px] h-[1em] ${cursorClassName} animate-pulse ml-0.5 align-middle`} />
         )}
       </span>
     </span>

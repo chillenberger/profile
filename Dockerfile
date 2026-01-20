@@ -1,29 +1,20 @@
 # Build Stage
 FROM node:20-alpine AS build
-
 WORKDIR /app
-
-# Install dependencies
 COPY package*.json ./
 RUN npm ci
-
-# Copy source code
 COPY . .
-
-# Build the app
 RUN npm run build
 
 # Production Stage
-FROM nginx:alpine
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+# Install only production dependencies
+RUN npm ci --only=production
+# Copy built assets: frontend (dist) and backend (dist/server)
+# Note: npm run build puts frontend in dist/ and backend in dist/server
+COPY --from=build /app/dist ./dist
 
-# Copy built assets from the build stage
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose port 8080 (Cloud Run default)
 EXPOSE 8080
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "start"]
