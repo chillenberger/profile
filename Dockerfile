@@ -8,6 +8,7 @@ RUN npm run build
 
 # Production Stage
 FROM node:20-alpine
+ENV NODE_ENV=production
 WORKDIR /app
 COPY package*.json ./
 # Install only production dependencies

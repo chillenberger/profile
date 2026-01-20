@@ -108,7 +108,9 @@ app.post('/api/ai/analyze', async (req, res) => {
 });
 
 // Serve static files from the React app
-const distPath = path.join(__dirname, '../dist');
+const distPath = process.env.NODE_ENV === 'production'
+  ? path.join(__dirname, '../')
+  : path.join(__dirname, '../dist');
 app.use(express.static(distPath));
 
 // The "catchall" handler: for any request that doesn't
