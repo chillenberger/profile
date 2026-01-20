@@ -11,6 +11,32 @@ interface JobAnalyzerProps {
 
 export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing, analysisResults }) => {
   const [localJobDesc, setLocalJobDesc] = useState('');
+  const [buttonState, setButtonState] = useState<'idle' | 'highlighting' | 'compiling' | 'waiting_for_api'>('idle');
+
+  const handleAnalyzeClick = () => {
+    setButtonState('highlighting');
+    onAnalyze(localJobDesc);
+
+    // Minimum 2s for highlighting
+    setTimeout(() => {
+      setButtonState('compiling');
+
+      // Minimum 2s for compiling
+      setTimeout(() => {
+        setButtonState((current) => {
+          // If we are still in the compiling sequence flow (not reset/unmounted), move to waiting
+          return 'waiting_for_api';
+        });
+      }, 2500);
+    }, 2500);
+  };
+
+  // Reset to idle only when both the sequence is done (waiting_for_api) AND analysis is finished
+  React.useEffect(() => {
+    if (!isAnalyzing && buttonState === 'waiting_for_api') {
+      setButtonState('idle');
+    }
+  }, [isAnalyzing, buttonState]);
 
   return (
     <>
@@ -37,11 +63,17 @@ export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing
             </div>
           </div>
           <button
-            onClick={() => onAnalyze(localJobDesc)}
+            onClick={handleAnalyzeClick}
             disabled={isAnalyzing || !localJobDesc.trim()}
             className={`w-full py-2 font-bold uppercase tracking-[0.2em] text-[10px] border transition-all ${isAnalyzing ? 'border-slate-700 text-slate-500 cursor-wait' : 'border-neon-blue/50 text-neon-blue hover:bg-neon-blue/10 hover:shadow-neon-blue'}`}
           >
-            {isAnalyzing ? 'Analyzing_Fit...' : 'Analyze_Candidate_Fit'}
+            {buttonState === 'idle' ? (
+              'Analyze_Candidate_Fit'
+            ) : buttonState === 'highlighting' ? (
+              <Typewriter key="highlighting" text="Highlighting_Important_Sections..." speed={20} cursorClassName="bg-neon-blue h-3" />
+            ) : (
+              <Typewriter key="compiling" text="Compiling_Report..." speed={20} cursorClassName="bg-neon-blue h-3" />
+            )}
           </button>
         </div>
       </div>

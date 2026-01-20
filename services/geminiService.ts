@@ -7,8 +7,15 @@ export async function askGeminiAboutDaniel(userMessage: string) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || 'Network response was not ok');
+      const errorText = await response.text();
+      console.error('Raw Server Error Response:', errorText);
+      try {
+        const errorData = JSON.parse(errorText);
+        throw new Error(errorData.error || `Server Error ${response.status}: ${errorText}`);
+      } catch (parseError) {
+        // If JSON parse fails, throw the raw text (it might be HTML from Nginx/Cloud Run)
+        throw new Error(`Server Error ${response.status}: ${errorText}`);
+      }
     }
 
     const data = await response.json();
@@ -35,8 +42,14 @@ export async function analyzeJobDescription(jobDesc: string, resumeData: any): P
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || 'Network response was not ok');
+      const errorText = await response.text();
+      console.error('Raw Server Error Response:', errorText);
+      try {
+        const errorData = JSON.parse(errorText);
+        throw new Error(errorData.error || `Server Error ${response.status}: ${errorText}`);
+      } catch (parseError) {
+        throw new Error(`Server Error ${response.status}: ${errorText}`);
+      }
     }
 
     return await response.json();
