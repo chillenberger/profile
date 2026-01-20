@@ -6,7 +6,10 @@ export async function askGeminiAboutDaniel(userMessage: string) {
       body: JSON.stringify({ message: userMessage }),
     });
 
-    if (!response.ok) throw new Error('Network response was not ok');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Network response was not ok');
+    }
 
     const data = await response.json();
     return data.text || "I'm sorry, I couldn't process that request.";
@@ -31,7 +34,10 @@ export async function analyzeJobDescription(jobDesc: string, resumeData: any): P
       body: JSON.stringify({ jobDesc, resumeData }),
     });
 
-    if (!response.ok) throw new Error('Network response was not ok');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Network response was not ok');
+    }
 
     return await response.json();
   } catch (error) {

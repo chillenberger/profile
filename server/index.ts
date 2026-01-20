@@ -60,9 +60,9 @@ app.post('/api/ai/chat', async (req, res) => {
       },
     });
     res.json({ text: response.text });
-  } catch (error) {
+  } catch (error: any) {
     console.error('AI Chat Error:', error);
-    res.status(500).json({ error: 'Failed to process AI request' });
+    res.status(500).json({ error: error.message || 'Failed to process AI request' });
   }
 });
 
@@ -101,9 +101,9 @@ app.post('/api/ai/analyze', async (req, res) => {
 
     const text = response.text || "{}";
     res.json(JSON.parse(text));
-  } catch (error) {
+  } catch (error: any) {
     console.error('AI Analysis Error:', error);
-    res.status(500).json({ error: 'Failed to analyze job description' });
+    res.status(500).json({ error: error.message || 'Failed to analyze job description' });
   }
 });
 
@@ -121,4 +121,6 @@ app.get(/(.*)/, (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  console.log(`GEMINI_API_KEY present: ${!!GEMINI_API_KEY}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
 });
