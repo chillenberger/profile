@@ -48,7 +48,7 @@ export const CityscapeBackground: React.FC = () => {
       {/* Moving Container - Increased height to 250vh to reduce parallax intensity */}
       <div
         ref={containerRef}
-        className="absolute top-0 left-0 right-0 w-full opacity-60 will-change-transform transition-transform duration-75 ease-out"
+        className="absolute top-0 left-0 right-0 w-full will-change-transform transition-transform duration-75 ease-out"
         style={{
           height: '250vh',
           transform: `translate3d(0, ${offsetY}px, 0)`
@@ -59,14 +59,10 @@ export const CityscapeBackground: React.FC = () => {
           className="absolute top-0 left-0 w-full h-[50%] bg-cover bg-bottom"
           style={{
             backgroundImage: 'url(/images/city-top.png)',
-            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
+            maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)'
           }}
         >
-          {/* Subtler Traffic */}
-          <div className="absolute top-[25%] left-[-20%] w-[140%] h-[1px] opacity-20 overflow-hidden"
-            style={{ animation: 'traffic-move 30s linear infinite', background: 'linear-gradient(90deg, transparent, #ff0000, transparent)' }}>
-          </div>
         </div>
 
         {/* PRIMARY DEAD ZONE - Tight transition */}
@@ -91,8 +87,6 @@ export const CityscapeBackground: React.FC = () => {
       {/* ASYMMETRIC ARCHITECTURAL OVERLAY - A single large solid panel to break symmetry without framing */}
       <div className="absolute top-0 bottom-0 left-0 w-[40%] bg-cyber-black/60 backdrop-blur-[2px] border-r border-white/20 z-[2] hidden lg:block"></div>
 
-      {/* Global Overlays - Lightened for better visibility */}
-      <div className="absolute inset-0 bg-[#050505]/40 mix-blend-multiply z-[1]"></div>
 
       {/* Atmospheric Vignette - Softer */}
       <div className="absolute inset-0 bg-gradient-to-t from-cyber-black via-transparent to-cyber-black opacity-70 z-[3]"></div>
