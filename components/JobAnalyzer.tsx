@@ -11,6 +11,7 @@ interface JobAnalyzerProps {
 
 export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing, analysisResults }) => {
   const [localJobDesc, setLocalJobDesc] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
   const [buttonState, setButtonState] = useState<'idle' | 'highlighting' | 'compiling' | 'waiting_for_api'>('idle');
 
   const handleAnalyzeClick = () => {
@@ -45,11 +46,21 @@ export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing
           <h4 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue font-bold mb-3 font-mono">Job_Description_Input</h4>
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-neon-blue/20 rounded-sm blur opacity-25 group-hover:opacity-50 transition duration-1000 animate-pulse"></div>
+
+            {/* Custom Placeholder with Blinking Cursor */}
+            {!localJobDesc && !isFocused && (
+              <div className="absolute top-0 left-0 w-full h-full p-3 text-xs font-mono text-slate-500 pointer-events-none z-20">
+                <span className="inline-block w-2 h-4 bg-neon-green ml-1 align-middle animate-cursor-blink shadow-[0_0_8px_#0aff0a]"></span>
+                &gt; PASTE / TYPE JOB_DESCRIPTION FOR ALIGNMENT
+              </div>
+            )}
+
             <textarea
               className="relative w-full h-24 bg-cyber-black/80 border border-slate-800 p-3 text-xs font-mono text-slate-300 focus:border-neon-blue focus:shadow-[0_0_10px_rgba(10,255,10,0.2)] caret-[#0aff0a] outline-none transition-all resize-none mb-3 z-10"
-              placeholder="> PASTE_JOB_DESCRIPTION_HERE_FOR_ALIGNMENT_"
               value={localJobDesc}
               onChange={(e) => setLocalJobDesc(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
             />
           </div>
           <div className="flex gap-4 mb-2">

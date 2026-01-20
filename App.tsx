@@ -105,14 +105,27 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onAnalyze, analysisResults, isAnalyzing }) => {
   return (
-    <section id="about" className="pt-36 pb-32 px-6 max-w-6xl mx-auto">
-      <div className="grid lg:grid-cols-2 gap-12 items-center lg:max-w-full max-w-[30rem] mx-auto">
+    <section id="about" className="pt-36 pb-32 px-40 max-w-6xl mx-auto">
+      <div className="max-w-[30rem] mx-auto lg:mx-0">
         <ProfileCard />
-        <JobAnalyzer
-          onAnalyze={onAnalyze}
-          isAnalyzing={isAnalyzing}
-          analysisResults={analysisResults}
-        />
+      </div>
+    </section>
+  );
+};
+
+const JobAnalyzerSection: React.FC<HeroProps> = ({ onAnalyze, analysisResults, isAnalyzing }) => {
+  return (
+    <section className="py-48 px-6">
+      <div className="flex justify-center">
+        <div className="w-full max-w-[30rem]">
+          <Reveal className="scan-reveal-right">
+            <JobAnalyzer
+              onAnalyze={onAnalyze}
+              isAnalyzing={isAnalyzing}
+              analysisResults={analysisResults}
+            />
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -155,15 +168,23 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
     return () => observer.disconnect();
   }, [delay]);
 
+  // If a custom className is provided (like slide-grow-right), use it exclusively
+  const hasCustomAnimation = className.includes('scan-reveal');
+
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ${className} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
+      className={hasCustomAnimation
+        ? (isVisible ? className : 'opacity-0')
+        : `transition-all duration-1000 ${className} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
     >
-      <div className={isVisible ? "reveal-flicker reveal-scan" : ""}>
-        {children}
-      </div>
+      {hasCustomAnimation ? (
+        children
+      ) : (
+        <div className={isVisible ? "reveal-flicker reveal-scan" : ""}>
+          {children}
+        </div>
+      )}
     </div>
   );
 };
@@ -358,6 +379,11 @@ const Home: React.FC = () => {
   return (
     <>
       <Hero
+        onAnalyze={handleAnalyze}
+        analysisResults={analysisResults}
+        isAnalyzing={isAnalyzing}
+      />
+      <JobAnalyzerSection
         onAnalyze={handleAnalyze}
         analysisResults={analysisResults}
         isAnalyzing={isAnalyzing}
