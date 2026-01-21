@@ -91,7 +91,7 @@ export const ProfileScanner: React.FC = () => {
       <div
         className="absolute inset-4 mix-blend-screen bg-contain bg-center bg-no-repeat z-10 origin-center"
         style={{
-          backgroundImage: "url('/hologram_man.png')",
+          backgroundImage: "url('/images/hologram_man.png')",
           animation: 'reveal-image 3.3s cubic-bezier(0.65, 0, 0.35, 1) forwards'
         }}
       ></div>
