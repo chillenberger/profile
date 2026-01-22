@@ -26,7 +26,7 @@ const Blog: React.FC = () => {
               className={`block p-4 border transition-all group ${activePost?.id === post.id ? 'bg-neon-blue/10 border-neon-blue' : 'bg-transparent border-slate-800 hover:border-neon-blue/50'}`}
             >
               <h3 className={`font-bold uppercase tracking-wide mb-1 transition-colors ${activePost?.id === post.id ? 'text-neon-blue' : 'text-slate-300 group-hover:text-white'}`}>{post.title}</h3>
-              <div className="flex justify-between text-xs text-slate-500 font-mono">
+              <div className="flex justify-between text-xs text-slate-400 font-mono">
                 <span>{post.date}</span>
                 <span>{post.readTime}</span>
               </div>
@@ -49,7 +49,7 @@ const Blog: React.FC = () => {
                 ))}
               </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-tighter text-white">{activePost.title}</h1>
-              <div className="flex gap-4 text-slate-500 text-sm font-mono border-l-2 border-neon-blue pl-4">
+              <div className="flex gap-4 text-slate-400 text-sm font-mono border-l-2 border-neon-blue pl-4">
                 <span>{activePost.date}</span>
                 <span>//</span>
                 <span>{activePost.readTime}</span>
@@ -60,7 +60,7 @@ const Blog: React.FC = () => {
             </div>
           </article>
         ) : (
-          <div className="flex items-center justify-center h-full text-slate-500 font-mono">
+          <div className="flex items-center justify-center h-full text-slate-400 font-mono">
             Awaiting input...
           </div>
         )}

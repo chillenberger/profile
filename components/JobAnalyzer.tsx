@@ -50,7 +50,7 @@ export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing
 
             {/* Custom Placeholder with Blinking Cursor */}
             {!localJobDesc && !isFocused && (
-              <div className="absolute top-0 left-0 w-full h-full p-3 text-xs font-mono text-slate-500 pointer-events-none z-20">
+              <div className="absolute top-0 left-0 w-full h-full p-3 text-xs font-mono text-slate-400 pointer-events-none z-20">
                 <span className="inline-block w-2 h-4 bg-neon-green ml-1 align-middle animate-cursor-blink shadow-[0_0_8px_#0aff0a]"></span>
                 &gt; PASTE / TYPE JOB_DESCRIPTION FOR ALIGNMENT
               </div>
@@ -68,17 +68,17 @@ export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing
           <div className="flex gap-4 mb-2">
             <div className="flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 bg-neon-green rounded-full shadow-[0_0_8px_#0aff0a]"></div>
-              <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Site Alignment: {analysisResults ? 'true' : 'false'}</span>
+              <span className="text-[8px] font-mono text-slate-300 uppercase tracking-widest">Site Alignment: {analysisResults ? 'true' : 'false'}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 bg-neon-purple/40 rounded-full"></div>
-              <span className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Report: {analysisResults ? 'generated' : 'none'}</span>
+              <span className="text-[8px] font-mono text-slate-300 uppercase tracking-widest">Report: {analysisResults ? 'generated' : 'none'}</span>
             </div>
           </div>
           <button
             onClick={handleAnalyzeClick}
             disabled={isAnalyzing || !localJobDesc.trim()}
-            className={`w-full py-2 font-bold uppercase tracking-[0.2em] text-[10px] border transition-all ${isAnalyzing ? 'border-slate-700 text-slate-500 cursor-wait' : 'border-neon-blue/50 text-neon-blue hover:bg-neon-blue/10 hover:shadow-neon-blue'}`}
+            className={`w-full py-2 font-bold uppercase tracking-[0.2em] text-[10px] border transition-all ${isAnalyzing ? 'border-slate-700 text-slate-400 cursor-wait' : 'border-neon-blue/50 text-neon-blue hover:bg-neon-blue/10 hover:shadow-neon-blue'}`}
           >
             {buttonState === 'idle' ? (
               'Analyze_Candidate_Fit'

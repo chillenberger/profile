@@ -106,7 +106,7 @@ const Projects: React.FC<{ highlightedNames?: string[] }> = ({ highlightedNames 
           <div className="flex justify-between items-start mb-6">
             <h3 className="text-xl font-bold uppercase tracking-wider text-white group-hover:text-neon-purple transition-colors">{project.name}</h3>
             {project.github && (
-              <a href={project.github} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-neon-purple transition-colors" aria-label="GitHub">
+              <a href={project.github} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-neon-purple transition-colors" aria-label="GitHub">
                 <Icons.Github />
               </a>
             )}
@@ -114,7 +114,7 @@ const Projects: React.FC<{ highlightedNames?: string[] }> = ({ highlightedNames 
           <p className="text-slate-400 mb-6 flex-grow font-mono text-sm leading-relaxed">{project.description}</p>
           <div className="space-y-4">
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2 border-b border-slate-800 pb-1 w-max">Technologies</p>
+              <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-2 border-b border-slate-800 pb-1 w-max">Technologies</p>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map(tech => (
                   <span key={tech} className="px-2 py-1 bg-neon-purple/10 border border-neon-purple/20 text-neon-purple text-xs font-mono uppercase">
@@ -124,10 +124,10 @@ const Projects: React.FC<{ highlightedNames?: string[] }> = ({ highlightedNames 
               </div>
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2 border-b border-slate-800 pb-1 w-max">Key Features</p>
+              <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-2 border-b border-slate-800 pb-1 w-max">Key Features</p>
               <ul className="grid grid-cols-2 gap-2">
                 {project.uses.map(use => (
-                  <li key={use} className="text-xs text-slate-500 flex items-center gap-2 font-mono">
+                  <li key={use} className="text-xs text-slate-400 flex items-center gap-2 font-mono">
                     <span className="w-1 h-1 bg-neon-purple"></span>
                     {use}
                   </li>
@@ -150,8 +150,8 @@ const Skills: React.FC<{ highlightedSkills?: string[] }> = ({ highlightedSkills 
       {SKILLS.map((cat, index) => (
         <Reveal key={cat.category} delay={index * 150}>
           {(isRevealed: boolean) => (
-            <div className="space-y-5">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-neon-green/60 border-b border-white/5 pb-3 font-mono">
+            <div className="space-y-5 bg-cyber-black/40 p-6 border border-white/5 backdrop-blur-sm">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-neon-green border-b border-white/5 pb-3 font-mono">
                 {cat.category}
               </h4>
               <div className="flex flex-col gap-2">
@@ -182,7 +182,7 @@ const Education: React.FC = () => (
           <span className="text-neon-blue font-mono text-[10px] uppercase tracking-widest bg-neon-blue/5 px-2 py-0.5 border border-neon-blue/20">{edu.period}</span>
           <h3 className="text-xl font-bold mt-4 text-white uppercase tracking-wide">{edu.degree}</h3>
           <p className="text-slate-400 mb-1 font-mono">{edu.school}</p>
-          <p className="text-slate-500 text-xs font-mono mb-4">{edu.location}</p>
+          <p className="text-slate-400 text-xs font-mono mb-4">{edu.location}</p>
           {edu.details && (
             <p className="text-sm text-slate-400 border-t border-slate-800 pt-4 italic">
               {edu.details}
@@ -220,7 +220,7 @@ const BlogSection: React.FC<{ highlightedBlogIds?: string[] }> = ({ highlightedB
                 {highlightedBlogIds.includes(post.id) && isRevealed && <RelevanceTooltip />}
                 <div className="flex justify-between items-start mb-4">
                   <span className="text-neon-blue font-mono text-[10px] uppercase tracking-widest bg-neon-blue/5 px-2 py-0.5 border border-neon-blue/20">{post.date}</span>
-                  <span className="text-slate-500 font-mono text-xs">{post.readTime}</span>
+                  <span className="text-slate-400 font-mono text-xs">{post.readTime}</span>
                 </div>
                 <Link to={`/blog/${post.id}`} className="block group-hover:opacity-80 transition-opacity">
                   <h3 className="text-xl font-bold mb-4 text-white uppercase tracking-wide group-hover:text-neon-blue transition-colors">{post.title}</h3>
@@ -229,7 +229,7 @@ const BlogSection: React.FC<{ highlightedBlogIds?: string[] }> = ({ highlightedB
                 <div className="mt-auto pt-4 border-t border-slate-800 flex justify-between items-center">
                   <div className="flex gap-2 flex-wrap">
                     {post.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[10px] text-slate-500 font-mono uppercase">#{tag}</span>
+                      <span key={tag} className="text-[10px] text-slate-400 font-mono uppercase">#{tag}</span>
                     ))}
                   </div>
                   <Link to={`/blog/${post.id}`} className="text-neon-blue text-xs font-mono uppercase tracking-widest hover:text-white transition-colors flex items-center gap-1 group/link">

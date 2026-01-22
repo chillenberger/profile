@@ -106,7 +106,7 @@ const Nav: React.FC = () => {
               px-4 py-1 border transition-all uppercase tracking-wide font-bold
               ${location.pathname.startsWith('/blog')
                 ? 'bg-neon-blue/10 border-neon-blue text-neon-blue shadow-neon-blue'
-                : 'border-slate-700 text-slate-500 hover:border-neon-blue hover:text-neon-blue hover:shadow-[0_0_10px_rgba(0,243,255,0.3)]'
+                : 'border-slate-700 text-slate-400 hover:border-neon-blue hover:text-neon-blue hover:shadow-[0_0_10px_rgba(0,243,255,0.3)]'
               }
             `}
           >
@@ -149,7 +149,7 @@ const Nav: React.FC = () => {
               text-lg py-3 border-b border-white/5 w-full uppercase tracking-wide font-bold flex items-center gap-2
               ${location.pathname.startsWith('/blog')
                 ? 'text-neon-blue'
-                : 'text-slate-500 hover:text-neon-blue'
+                : 'text-slate-400 hover:text-neon-blue'
               }
             `}
           >

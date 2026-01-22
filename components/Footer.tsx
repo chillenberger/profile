@@ -6,7 +6,7 @@ const Footer: React.FC = () => (
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 px-6">
       <div className="max-w-md">
         <h3 className="text-2xl font-bold mb-4 uppercase tracking-[0.2em] text-white">{wrapSnakeCase("Initialize_Connection")}</h3>
-        <p className="text-slate-500 text-sm leading-relaxed mb-6">Open for senior engineering roles & interesting projects that push the boundaries of technology.</p>
+        <p className="text-slate-400 text-sm leading-relaxed mb-6">Open for senior engineering roles & interesting projects that push the boundaries of technology.</p>
         <p className="text-neon-blue font-mono text-xs tracking-wider">DAN.OVERPASS519@PASSINBOX.COM</p>
       </div>
       <div className="flex gap-4">
@@ -18,7 +18,7 @@ const Footer: React.FC = () => (
         </a>
       </div>
     </div>
-    <div className="mt-12 text-center text-slate-600 text-xs font-mono">
+    <div className="mt-12 text-center text-slate-500 text-xs font-mono">
       &copy; {new Date().getFullYear()} Daniel Illenberger. System Architecture: React / Tailwind / Gemini.
     </div>
   </footer>

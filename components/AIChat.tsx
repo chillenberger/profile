@@ -52,7 +52,7 @@ const AIChat: React.FC = () => {
                 </span>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-neon-blue transition-colors group">
+            <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-neon-blue transition-colors group">
               <div className="relative">
                 <div className="absolute inset-0 bg-neon-blue opacity-0 group-hover:opacity-20 blur-md transition-opacity"></div>
                 <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>

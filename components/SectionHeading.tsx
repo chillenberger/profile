@@ -7,7 +7,7 @@ const SectionHeading: React.FC<{ children: React.ReactNode; id: string; subtitle
       <span className="w-8 h-[1px] bg-neon-blue/40"></span>
       {typeof children === 'string' ? wrapSnakeCase(children) : children}
     </h2>
-    {subtitle && <p className="text-slate-500 font-mono text-xs max-w-2xl pl-11">{subtitle}</p>}
+    {subtitle && <p className="text-slate-400 font-mono text-xs max-w-2xl pl-11">{subtitle}</p>}
   </div>
 );
 
