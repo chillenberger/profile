@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: number; color?: string }> = ({ children, className = "", delay = 0, color = "blue" }) => {
   const [isVisible, setIsVisible] = React.useState(false);
+  const [animationComplete, setAnimationComplete] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,6 +31,15 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
   // If a custom className is provided (like slide-grow-right), use it exclusively
   const hasCustomAnimation = className.includes('scan-reveal');
 
+  useEffect(() => {
+    if (isVisible && !hasCustomAnimation) {
+      const timer = setTimeout(() => {
+        setAnimationComplete(true);
+      }, 1500); // Wait for scan animation (1.2s) + buffer
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, hasCustomAnimation]);
+
   return (
     <div
       ref={ref}
@@ -40,7 +50,7 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: 
       {hasCustomAnimation ? (
         children
       ) : (
-        <div className={isVisible ? "reveal-flicker reveal-scan" : ""}>
+        <div className={isVisible && !animationComplete ? "reveal-flicker reveal-scan" : "relative"}>
           {children}
         </div>
       )}

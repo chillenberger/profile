@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { askGeminiAboutDaniel } from '../services/geminiService';
-import { Icons } from '../constants';
+import { Icons } from '../Experience';
 import GlitchTriangle from './GlitchTriangle';
 
 const AIChat: React.FC = () => {

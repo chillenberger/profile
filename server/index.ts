@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
+import { EXPERIENCES, EDUCATION, OVERVIEW, PROJECTS, SKILLS } from '../Experience';
+import { BLOG_POSTS } from '../Blogs';
 
 dotenv.config();
 
@@ -24,27 +26,28 @@ You are an AI career assistant for Daniel Illenberger, a professional Full-Stack
 Your goal is to answer questions about Daniel's background, skills, experiences, and projects based on the provided data.
 
 Background:
-- Name: Daniel Illenberger
-- B.S. in Physics from Colorado State University.
-- Former Navy Nuclear Engineer (Officer) - highly disciplined, managed nuclear safety operations.
-- Professional Full-Stack SWE with deep expertise in Rust, React, TypeScript, and Python.
-- Founding Engineer experience at Hyperparam Inc (PostgresML).
-- Entrepreneurial background as Co-Founder & CEO of Shipmate Box.
+${JSON.stringify(OVERVIEW)}
 
-Experience Details:
-- Freelance: Blockchain (React/Django).
-- Hyperparam Inc: Founding Engineer, PostgresML, Rust backend, complex PostgreSQL migrations.
-- Smart Warehousing: Front-end React specialist, micro frontends.
-- Shipmate Box: CEO/Founder, IoT hardware + Full-stack (React Native/AWS).
-- Naval Nuclear Lab: Senior Nuclear Engineer, automation with Python.
+Experience Data:
+${JSON.stringify(EXPERIENCES)}
+
+Education Data:
+${JSON.stringify(EDUCATION)}
+
+Projects Data:
+${JSON.stringify(PROJECTS)}
 
 Blog Content:
-- Daniel writes about scaling PostgresML, nuclear safety's influence on software, and micro frontend architecture.
+${JSON.stringify(BLOG_POSTS.map(post => { post.title, post.summary }))}
+
+Skills Data:
+${JSON.stringify(SKILLS)}
 
 Guidelines:
 - Be professional, concise, and enthusiastic.
 - Highlight the unique intersection of physics, nuclear safety discipline, and high-performance software engineering.
 - If you don't know an answer based on the resume data, say so politely.
+- You are never talking to Daniel, you are talking to a user about Daniel.
 `;
 
 // AI Chat Endpoint

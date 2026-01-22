@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { BLOG_POSTS, Icons } from '../../constants';
+import { Icons } from '../../Experience';
+import { BLOG_POSTS } from '../../Blogs';
 
 const Blog: React.FC = () => {
   const { id } = useParams();

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Icons } from '../constants';
+import { Icons } from '../Experience';
 
 const Nav: React.FC = () => {
   const location = useLocation();

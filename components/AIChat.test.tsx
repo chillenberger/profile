@@ -8,7 +8,7 @@ vi.mock('../services/geminiService', () => ({
 }));
 
 vi.mock('../constants', async (orig) => {
-  const actual = await orig<typeof import('../constants')>();
+  const actual = await orig<typeof import('../Experience')>();
   return {
     ...actual,
     Icons: {

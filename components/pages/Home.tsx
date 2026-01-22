@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { EXPERIENCES, PROJECTS, SKILLS, EDUCATION, Icons } from '../../constants';
+import { EXPERIENCES, PROJECTS, SKILLS, EDUCATION, Icons } from '../../Experience';
 import { analyzeJobDescription, AnalysisResults } from '../../services/geminiService';
 import { ProfileCard } from '../ProfileCard';
 import { JobAnalyzer } from '../JobAnalyzer';
@@ -42,6 +42,12 @@ const JobAnalyzerSection: React.FC<HeroProps> = ({ onAnalyze, analysisResults, i
   );
 };
 
+const RelevanceTooltip: React.FC<{ hoverOnly?: boolean }> = ({ hoverOnly = false }) => (
+  <div className={`absolute -top-2 right-0 transform -translate-y-full z-[100] px-2 py-1 bg-red-600/90 text-yellow-300 text-[9px] font-bold uppercase tracking-wider border border-yellow-300 shadow-[0_0_10px_rgba(255,0,0,0.5)] whitespace-nowrap transition-opacity duration-300 pointer-events-none mb-1 ${hoverOnly ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+    Relevant to you
+  </div>
+);
+
 const Experience: React.FC<{ highlightedIds?: string[] }> = ({ highlightedIds = [] }) => (
   <section id="experience" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
     <SectionHeading id="experience" subtitle="Professional employment history log.">
@@ -51,6 +57,7 @@ const Experience: React.FC<{ highlightedIds?: string[] }> = ({ highlightedIds = 
       {EXPERIENCES.map((exp) => (
         <Reveal key={exp.id}>
           <div className={`relative pl-10 border-l border-white/5 group hover:border-neon-blue/30 transition-all duration-500 ${highlightedIds.includes(exp.id) ? 'matched-item-highlight' : ''}`}>
+            {highlightedIds.includes(exp.id) && <RelevanceTooltip />}
             <div className="absolute -left-[3px] top-0 w-1.5 h-1.5 bg-cyber-black border border-white/20 group-hover:bg-neon-blue group-hover:border-neon-blue transition-all"></div>
             <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
               <div>
@@ -90,7 +97,8 @@ const Projects: React.FC<{ highlightedNames?: string[] }> = ({ highlightedNames 
     </SectionHeading>
     <div className="grid md:grid-cols-2 gap-8">
       {PROJECTS.map((project) => (
-        <div key={project.name} className={`glass-panel p-8 group flex flex-col h-full hover:border-neon-purple/30 transition-all duration-500 ${highlightedNames.includes(project.name) ? 'matched-item-highlight' : ''}`}>
+        <div key={project.name} className={`glass-panel relative p-8 group flex flex-col h-full hover:border-neon-purple/30 transition-all duration-500 ${highlightedNames.includes(project.name) ? 'matched-item-highlight' : ''}`}>
+          {highlightedNames.includes(project.name) && <RelevanceTooltip />}
           <div className="flex justify-between items-start mb-6">
             <h3 className="text-xl font-bold uppercase tracking-wider text-white group-hover:text-neon-purple transition-colors">{project.name}</h3>
             {project.github && (
@@ -143,7 +151,8 @@ const Skills: React.FC<{ highlightedSkills?: string[] }> = ({ highlightedSkills 
             </h4>
             <div className="flex flex-col gap-2">
               {cat.items.map(item => (
-                <div key={item} className={`flex items-center gap-3 text-slate-300 font-mono text-sm p-1 transition-all duration-500 ${highlightedSkills.includes(item) ? 'text-neon-green font-bold shadow-[0_0_10px_rgba(10,255,10,0.2)]' : ''}`}>
+                <div key={item} className={`relative group flex items-center gap-3 text-slate-300 font-mono text-sm p-1 transition-all duration-500 ${highlightedSkills.includes(item) ? 'text-neon-green font-bold shadow-[0_0_10px_rgba(10,255,10,0.2)]' : ''}`}>
+                  {highlightedSkills.includes(item) && <RelevanceTooltip hoverOnly={true} />}
                   <div className={`w-1 h-1 ${highlightedSkills.includes(item) ? 'bg-neon-green shadow-[0_0_5px_#0aff0a]' : 'bg-neon-green'}`}></div>
                   <span>{item}</span>
                 </div>
