@@ -8,16 +8,13 @@ export const ProfileChallenge = {
   content: (
     <div className="space-y-6 text-slate-300 leading-relaxed">
       <p>
-        I wrote this profile for the Gemini Profile Challenge. It is intended to show some angle of who I am. I present the facts of my software engineering career through text with a fun futuristic theme. With the design, I allegorize my view of technology as an exciting futuristic city to be explored while still showing its dark and dreary corners, attractive but mysterious signs, and the distant mega-structure buildings that hold so much potential.
+        My profile shows some angle of who I am.  I present the facts of my software engineering career through text with a fun futuristic theme. With the design I use a dystopian cityscape with its dark and dreary corners, attractive but mysterious signs, and the distant mega structure buildings that hold so much potential to allegorize my view of technology as an exciting but dangerous thing.  I added a customization feature that highlights parts of the page relevant to a user posted job description as a glimpse of my view of what websites can be, a highly curated experience specific to each user.
       </p>
       <p>
-        I added a customization feature that highlights parts of the page relevant to a user-posted job description as a glimpse of my view of what websites can be: a highly curated experience specific to each user.
+        More specifically I am a full stack developer who hones his product sense and coding skills by working with a diverse collection of startups.  I have always appreciated the art and creativity associated with UX/UI, and enjoy any opportunity I get to marry efficient backend with beautiful design.  Though I have sufficiently delivered complex front ends, designing them has never been my strength.
       </p>
       <p>
-        More specifically, I am a full-stack developer who hones his product sense and coding skills by working with a diverse collection of startups. I have always appreciated the art and creativity associated with UX/UI, and enjoy any opportunity I get to marry efficient backend with beautiful design. Though I have sufficiently delivered complex front ends, designing them has never been my strength.
-      </p>
-      <p>
-        Like most coders, I am currently trying to grasp the quickly changing software engineering job market. Conforming my skills to new AI tools has been a joy, and working on this project as a pure "vibe coding" exercise has brought me much insight.
+        Like most coders I am currently trying to grasp the quickly changing software engineering job market.  Conforming my skills to new AI tools has been a joy and working on this project as a pure vibe coding exercise has brought me much insight.
       </p>
 
       <h3 className="text-xl font-bold text-white mt-8 mb-4">How I Built It</h3>
@@ -53,13 +50,10 @@ export const ProfileChallenge = {
 
       <h3 className="text-xl font-bold text-white mt-8 mb-4">What I'm Most Proud Of</h3>
       <p>
-        I take pride in what I believe to be a nice use of dark space over complex, intricate images to give the feel of a busy dystopian future while avoiding the chaos of using complex background images. This design is both revealing of some aspect of myself and allegorical to the rapidly shifting and unpredictable world AI propels us toward.
+        Design wise I take pride in what I believe to be a nice use of dark shadows over complex intricate images. This is intended to reduce the chaos of the busy dystopian city image why still invoking awe.
       </p>
       <p>
-        I felt the design needed some interactivity flair, so I added a customization input which allows users to curate the site according to a job description. When the user inputs a job description, I produce a short paragraph derived from my work experience and highlight relevant parts of my site that attention should be paid to.
-      </p>
-      <p>
-        As of now, the feature highlights applicable sections of my profile based on a job description. This feature could be taken further; alas, there is only so much time one can contribute.
+        Feature wise I am proud of my customization feature.  An input is available which allows users to curate the site according to a job description.  By pasting or typing in their needs, the site will reconfigure itself to highlight the most relevant parts, display relevant blogs in the home page blog section, and write out a short paragraph about my expertise as it pertains to them. In a more complex web application this feature could be taken much further by rewriting copy, automatic reconfiguring through prior accumulated use data rather the user input, and much more.
       </p>
     </div>
   )
