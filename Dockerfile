@@ -14,7 +14,7 @@ COPY package*.json ./
 # Install only production dependencies
 RUN npm ci --only=production
 # Copy built assets: frontend (dist) and backend (dist/server)
-# Note: npm run build puts frontend in dist/ and backend in dist/server
+# Note: npm run build puts frontend in dist/ and backend in dist/server/server
 COPY --from=build /app/dist ./dist
 
 EXPOSE 8080

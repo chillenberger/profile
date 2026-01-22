@@ -116,7 +116,7 @@ app.post('/api/ai/analyze', async (req, res) => {
 
 // Serve static files from the React app
 const distPath = process.env.NODE_ENV === 'production'
-  ? path.join(__dirname, '../')
+  ? path.join(__dirname, '../../')
   : path.join(__dirname, '../dist');
 app.use(express.static(distPath));
 
