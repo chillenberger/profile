@@ -1,6 +1,7 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
@@ -16,7 +17,10 @@ export default defineConfig(({ mode }) => {
         }
       }
     },
-    plugins: [react()],
+    plugins: [
+      react(),
+      viteCompression() // Default is gzip
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
@@ -27,6 +31,17 @@ export default defineConfig(({ mode }) => {
       globals: true,
       setupFiles: './vitest.setup.ts',
       css: true,
+    },
+    build: {
+      minify: 'terser', // Use terser for better minification
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+            // 'vendor-ui': ['framer-motion'] // explicit chunk for large UI libs if present, or just to separate concerns
+          }
+        }
+      }
     }
   };
 });

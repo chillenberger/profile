@@ -1,5 +1,7 @@
 import express from 'express';
+import fs from 'fs';
 import cors from 'cors';
+import compression from 'compression';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -16,6 +18,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(cors());
+app.use(compression());
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
@@ -115,9 +118,11 @@ app.post('/api/ai/analyze', async (req, res) => {
 });
 
 // Serve static files from the React app
-const distPath = process.env.NODE_ENV === 'production'
-  ? path.join(__dirname, '../../')
-  : path.join(__dirname, '../dist');
+// Serve static files from the React app
+let distPath = path.join(__dirname, '../dist');
+if (fs.existsSync(path.join(__dirname, '../../index.html'))) {
+  distPath = path.join(__dirname, '../../');
+}
 app.use(express.static(distPath));
 
 // The "catchall" handler: for any request that doesn't

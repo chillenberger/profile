@@ -118,6 +118,8 @@ const Nav: React.FC = () => {
         <button
           className="lg:hidden text-slate-400 hover:text-neon-blue z-50 transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? (
             <Icons.Close className="w-8 h-8" />
@@ -157,10 +159,10 @@ const Nav: React.FC = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
-          <a href="https://github.com/chillenberger" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" title="GitHub">
+          <a href="https://github.com/chillenberger" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" title="GitHub" aria-label="Visit GitHub Profile">
             <Icons.Github />
           </a>
-          <a href="https://www.linkedin.com/in/daniel-illenberger-0021094b/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" title="LinkedIn">
+          <a href="https://www.linkedin.com/in/daniel-illenberger-0021094b/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" title="LinkedIn" aria-label="Visit LinkedIn Profile">
             <Icons.Linkedin />
           </a>
         </div>

@@ -106,7 +106,7 @@ const Projects: React.FC<{ highlightedNames?: string[] }> = ({ highlightedNames 
           <div className="flex justify-between items-start mb-6">
             <h3 className="text-xl font-bold uppercase tracking-wider text-white group-hover:text-neon-purple transition-colors">{project.name}</h3>
             {project.github && (
-              <a href={project.github} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-neon-purple transition-colors">
+              <a href={project.github} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-neon-purple transition-colors" aria-label="GitHub">
                 <Icons.Github />
               </a>
             )}

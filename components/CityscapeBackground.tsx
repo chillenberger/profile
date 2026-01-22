@@ -58,7 +58,8 @@ export const CityscapeBackground: React.FC = () => {
         <div
           className="absolute top-0 left-0 w-full h-[50%] bg-cover bg-bottom"
           style={{
-            backgroundImage: 'url(/images/city-top.png)',
+            backgroundColor: '#050a14', // Placeholder color
+            backgroundImage: 'url(/images/city-top.webp)',
             maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)'
           }}
@@ -72,7 +73,8 @@ export const CityscapeBackground: React.FC = () => {
         <div
           className="absolute top-[55%] left-0 w-full h-[45%] bg-cover bg-top"
           style={{
-            backgroundImage: 'url(/images/city-street.jpg)',
+            backgroundColor: '#0a0f1a', // Placeholder color
+            backgroundImage: 'url(/images/city-street.webp)',
             maskImage: 'linear-gradient(to top, black 80%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to top, black 80%, transparent 100%)'
           }}

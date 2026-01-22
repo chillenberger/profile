@@ -62,6 +62,7 @@ export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing
               onChange={(e) => setLocalJobDesc(e.target.value)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              aria-label="Job Description Input"
             />
           </div>
           <div className="flex gap-4 mb-2">
