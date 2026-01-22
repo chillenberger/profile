@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { EXPERIENCES, PROJECTS, SKILLS, EDUCATION, Icons } from '../../Experience';
+import { useLocation, Link } from 'react-router-dom';
+import { AlternatingTypewriter } from '../../components/AlternatingTypewriter';
+import { EXPERIENCES, PROJECTS, SKILLS, EDUCATION, Icons } from '../../Experience.js';
+import { BLOG_POSTS } from '../../Blogs/index.js';
 import { analyzeJobDescription, AnalysisResults } from '../../services/geminiService';
 import { ProfileCard } from '../ProfileCard';
 import { JobAnalyzer } from '../JobAnalyzer';
@@ -43,8 +45,8 @@ const JobAnalyzerSection: React.FC<HeroProps> = ({ onAnalyze, analysisResults, i
 };
 
 const RelevanceTooltip: React.FC<{ hoverOnly?: boolean }> = ({ hoverOnly = false }) => (
-  <div className={`absolute -top-2 right-0 transform -translate-y-full z-[100] px-2 py-1 bg-red-600/90 text-yellow-300 text-[9px] font-bold uppercase tracking-wider border border-yellow-300 shadow-[0_0_10px_rgba(255,0,0,0.5)] whitespace-nowrap transition-opacity duration-300 pointer-events-none mb-1 ${hoverOnly ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
-    Relevant to you
+  <div className={`absolute -top-3 -right-1 transform z-[100] px-3 py-1 bg-red-900/90 text-yellow-300 text-[9px] font-mono font-bold uppercase tracking-widest border border-yellow-500/50 shadow-[0_0_10px_rgba(255,0,0,0.2)] whitespace-nowrap transition-opacity duration-300 pointer-events-none mb-1 backdrop-blur-md ${hoverOnly ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+    Relevant_to_you
   </div>
 );
 
@@ -56,34 +58,36 @@ const Experience: React.FC<{ highlightedIds?: string[] }> = ({ highlightedIds = 
     <div className="space-y-12">
       {EXPERIENCES.map((exp) => (
         <Reveal key={exp.id}>
-          <div className={`relative pl-10 border-l border-white/5 group hover:border-neon-blue/30 transition-all duration-500 ${highlightedIds.includes(exp.id) ? 'matched-item-highlight' : ''}`}>
-            {highlightedIds.includes(exp.id) && <RelevanceTooltip />}
-            <div className="absolute -left-[3px] top-0 w-1.5 h-1.5 bg-cyber-black border border-white/20 group-hover:bg-neon-blue group-hover:border-neon-blue transition-all"></div>
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-              <div>
-                <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors uppercase tracking-wider">{exp.role}</h3>
-                <p className="text-slate-400 font-medium">{exp.company}</p>
+          {(isRevealed: boolean) => (
+            <div className={`relative pl-10 py-2 border-l border-white/5 group hover:border-neon-blue/30 transition-all duration-500 ${highlightedIds.includes(exp.id) ? 'matched-item-highlight' : ''}`}>
+              {highlightedIds.includes(exp.id) && isRevealed && <RelevanceTooltip />}
+              <div className="absolute -left-[3px] top-0 w-1.5 h-1.5 bg-cyber-black border border-white/20 group-hover:bg-neon-blue group-hover:border-neon-blue transition-all"></div>
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors uppercase tracking-wider">{exp.role}</h3>
+                  <p className="text-slate-400 font-medium">{exp.company}</p>
+                </div>
+                <div className="mt-2 md:mt-0 text-neon-blue/80 text-xs font-mono border border-neon-blue/20 px-2 py-1 bg-neon-blue/5">
+                  {exp.period} • {exp.location}
+                </div>
               </div>
-              <div className="mt-2 md:mt-0 text-neon-blue/80 text-xs font-mono border border-neon-blue/20 px-2 py-1 bg-neon-blue/5">
-                {exp.period} • {exp.location}
+              <ul className="space-y-3 mb-6">
+                {exp.description.map((bullet, idx) => (
+                  <li key={idx} className="text-slate-400 text-sm leading-relaxed flex gap-3 font-mono">
+                    <span className="text-neon-blue mt-0.5">»</span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2">
+                {exp.skills?.map(skill => (
+                  <span key={skill} className="px-2 py-0.5 bg-slate-900 border border-slate-700 text-[10px] font-mono text-slate-400 uppercase tracking-wide hover:border-neon-blue hover:text-neon-blue transition-colors">
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
-            <ul className="space-y-3 mb-6">
-              {exp.description.map((bullet, idx) => (
-                <li key={idx} className="text-slate-400 text-sm leading-relaxed flex gap-3 font-mono">
-                  <span className="text-neon-blue mt-0.5">»</span>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap gap-2">
-              {exp.skills?.map(skill => (
-                <span key={skill} className="px-2 py-0.5 bg-slate-900 border border-slate-700 text-[10px] font-mono text-slate-400 uppercase tracking-wide hover:border-neon-blue hover:text-neon-blue transition-colors">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+          )}
         </Reveal>
       ))}
     </div>
@@ -145,20 +149,22 @@ const Skills: React.FC<{ highlightedSkills?: string[] }> = ({ highlightedSkills 
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {SKILLS.map((cat, index) => (
         <Reveal key={cat.category} delay={index * 150}>
-          <div className="space-y-5">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-neon-green/60 border-b border-white/5 pb-3 font-mono">
-              {cat.category}
-            </h4>
-            <div className="flex flex-col gap-2">
-              {cat.items.map(item => (
-                <div key={item} className={`relative group flex items-center gap-3 text-slate-300 font-mono text-sm p-1 transition-all duration-500 ${highlightedSkills.includes(item) ? 'text-neon-green font-bold shadow-[0_0_10px_rgba(10,255,10,0.2)]' : ''}`}>
-                  {highlightedSkills.includes(item) && <RelevanceTooltip hoverOnly={true} />}
-                  <div className={`w-1 h-1 ${highlightedSkills.includes(item) ? 'bg-neon-green shadow-[0_0_5px_#0aff0a]' : 'bg-neon-green'}`}></div>
-                  <span>{item}</span>
-                </div>
-              ))}
+          {(isRevealed: boolean) => (
+            <div className="space-y-5">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-neon-green/60 border-b border-white/5 pb-3 font-mono">
+                {cat.category}
+              </h4>
+              <div className="flex flex-col gap-2">
+                {cat.items.map(item => (
+                  <div key={item} className={`relative group flex items-center gap-3 text-slate-300 font-mono text-sm p-1 transition-all duration-500 ${highlightedSkills.includes(item) ? 'text-neon-green font-bold shadow-[0_0_10px_rgba(10,255,10,0.2)]' : ''}`}>
+                    {highlightedSkills.includes(item) && isRevealed && <RelevanceTooltip hoverOnly={true} />}
+                    <div className={`w-1 h-1 ${highlightedSkills.includes(item) ? 'bg-neon-green shadow-[0_0_5px_#0aff0a]' : 'bg-neon-green'}`}></div>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </Reveal>
       ))}
     </div>
@@ -187,6 +193,62 @@ const Education: React.FC = () => (
     </div>
   </section>
 );
+
+const BlogSection: React.FC<{ highlightedBlogIds?: string[] }> = ({ highlightedBlogIds = [] }) => {
+  const displayedPosts = React.useMemo(() => {
+    if (highlightedBlogIds.length > 0) {
+      // Filter out finding blogs
+      const highlighted = BLOG_POSTS.filter(p => highlightedBlogIds.includes(p.id));
+      // Get the rest
+      const others = BLOG_POSTS.filter(p => !highlightedBlogIds.includes(p.id));
+      // Combine, highlighted first, then others, slice to 2
+      return [...highlighted, ...others].slice(0, 2);
+    }
+    return BLOG_POSTS.slice(0, 2);
+  }, [highlightedBlogIds]);
+
+  return (
+    <section id="blog" className="py-48 px-6 max-w-6xl mx-auto border-t border-slate-900/50">
+      <SectionHeading id="blog" subtitle="Recent writes and technical explorations.">
+        Blogs_and_Info
+      </SectionHeading>
+      <div className="grid md:grid-cols-2 gap-8">
+        {displayedPosts.map((post) => (
+          <Reveal key={post.id} className="h-full reveal-glitch">
+            {(isRevealed: boolean) => (
+              <div className={`glass-panel p-8 hover:border-neon-blue/30 transition-all flex flex-col h-full relative group ${highlightedBlogIds.includes(post.id) ? 'matched-item-highlight' : ''}`}>
+                {highlightedBlogIds.includes(post.id) && isRevealed && <RelevanceTooltip />}
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-neon-blue font-mono text-[10px] uppercase tracking-widest bg-neon-blue/5 px-2 py-0.5 border border-neon-blue/20">{post.date}</span>
+                  <span className="text-slate-500 font-mono text-xs">{post.readTime}</span>
+                </div>
+                <Link to={`/blog/${post.id}`} className="block group-hover:opacity-80 transition-opacity">
+                  <h3 className="text-xl font-bold mb-4 text-white uppercase tracking-wide group-hover:text-neon-blue transition-colors">{post.title}</h3>
+                </Link>
+                <p className="text-slate-400 mb-6 font-mono text-sm leading-relaxed flex-grow">{post.summary}</p>
+                <div className="mt-auto pt-4 border-t border-slate-800 flex justify-between items-center">
+                  <div className="flex gap-2 flex-wrap">
+                    {post.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="text-[10px] text-slate-500 font-mono uppercase">#{tag}</span>
+                    ))}
+                  </div>
+                  <Link to={`/blog/${post.id}`} className="text-neon-blue text-xs font-mono uppercase tracking-widest hover:text-white transition-colors flex items-center gap-1 group/link">
+                    Read_Intel <span className="transform group-hover/link:translate-x-1 transition-transform">→</span>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </Reveal>
+        ))}
+      </div>
+      <div className="mt-12 text-center">
+        <Link to="/blog" className="inline-block px-8 py-3 bg-neon-blue/10 border border-neon-blue/30 text-neon-blue font-mono text-xs uppercase tracking-[0.2em] hover:bg-neon-blue/20 hover:border-neon-blue transition-all">
+          View_All_Transmissions
+        </Link>
+      </div>
+    </section>
+  );
+};
 
 const Home: React.FC = () => {
   // Handle processing scroll for hash links on initial load
@@ -227,6 +289,7 @@ const Home: React.FC = () => {
         analysisResults={analysisResults}
         isAnalyzing={isAnalyzing}
       />
+      <BlogSection highlightedBlogIds={analysisResults?.highlightedBlogIds} />
       <Experience highlightedIds={analysisResults?.highlightedExpIds} />
       <Projects highlightedNames={analysisResults?.highlightedProjectNames} />
       <Skills highlightedSkills={analysisResults?.highlightedSkillNames} />

@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
-import { EXPERIENCES, EDUCATION, OVERVIEW, PROJECTS, SKILLS } from '../Experience';
-import { BLOG_POSTS } from '../Blogs';
+import { EXPERIENCES, EDUCATION, OVERVIEW, PROJECTS, SKILLS } from '../Experience.js';
+import { BLOG_POSTS } from '../Blogs/index.js';
 
 dotenv.config();
 
@@ -81,13 +81,17 @@ app.post('/api/ai/analyze', async (req, res) => {
     
     Resume Data:
     ${JSON.stringify(resumeData)}
+
+    Blog Data:
+    ${JSON.stringify(BLOG_POSTS.map(p => ({ id: p.id, title: p.title, summary: p.summary, tags: p.tags })))}
     
     Return a JSON object with the following fields:
     1. "summary": A short, compelling paragraph (max 3-4 sentences) about why Dan is a good candidate for this specific role.
     2. "highlightedSkillNames": An array of skill strings that exactly match the names in the SITESTRUCTURE.
     3. "highlightedExpIds": An array of experience IDs (e.g., "exp-1") that are highly relevant.
     4. "highlightedProjectNames": An array of project names that are highly relevant.
-    
+    5. "highlightedBlogIds": An array of blog IDs that are relevant to the job (max 2).
+
     IMPORTANT: Return ONLY the JSON object. No markdown formatting.
   `;
 

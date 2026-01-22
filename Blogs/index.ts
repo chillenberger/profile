@@ -1,4 +1,5 @@
-import { TextEditor } from "./text-editor";
-import { NuclearSafety } from "./nuclear-safety";
+import { TextEditor } from "./text-editor.js";
+import { NuclearSafety } from "./nuclear-safety.js";
+import { ProfileChallenge } from "./profile-challange.js";
 
-export const BLOG_POSTS = [TextEditor, NuclearSafety];
+export const BLOG_POSTS = [TextEditor, NuclearSafety, ProfileChallenge];

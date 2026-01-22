@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { AnalysisResults } from '../services/geminiService';
 import { Typewriter } from './Typewriter';
+import { AlternatingTypewriter } from './AlternatingTypewriter';
 
 interface JobAnalyzerProps {
   onAnalyze: (jobDesc: string) => void;
@@ -93,9 +94,12 @@ export const JobAnalyzer: React.FC<JobAnalyzerProps> = ({ onAnalyze, isAnalyzing
         <div className="glass-panel p-5 border-neon-green/30 animate-fade-in-up relative overflow-hidden mt-4 order-3 lg:order-3 lg:col-span-2 w-full">
           <div className="absolute top-0 right-0 w-16 h-16 bg-neon-green/5 blur-xl"></div>
           <h4 className="text-[10px] uppercase tracking-[0.3em] text-neon-green font-bold mb-3 font-mono">Alignment_Report</h4>
-          <p className="text-sm text-slate-300 leading-relaxed font-mono">
-            <Typewriter text={analysisResults.summary} speed={15} cursorClassName="bg-neon-green" />
-          </p>
+          <AlternatingTypewriter
+            text={analysisResults.summary}
+            speed={20}
+            lineDelay={200}
+            className="text-sm text-slate-300 leading-relaxed font-mono w-full"
+          />
           <div className="mt-3 flex items-center gap-2">
             <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse shadow-[0_0_8px_#0aff0a]"></div>
             <span className="text-[8px] font-mono text-neon-green uppercase tracking-widest">Optimal_Match_Detected</span>

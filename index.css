@@ -82,10 +82,7 @@
     clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   }
 
-  .matched-item-highlight {
-    @apply border-neon-green;
-    animation: highlight-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
+
 
   .scan-reveal-right {
     position: relative;
@@ -442,23 +439,91 @@
   border: 1px solid #00f3ff;
 }
 
-@keyframes highlight-pulse {
+.matched-item-highlight {
+  @apply border-yellow-500/30;
+  box-shadow: 0 0 15px rgba(255, 200, 0, 0.05);
+  animation: highlight-breath 4s ease-in-out infinite;
+}
+
+@keyframes highlight-breath {
 
   0%,
   100% {
-    box-shadow: 0 0 15px rgba(10, 255, 10, 0.4);
-    background-color: rgba(10, 255, 10, 0.05);
-    border-color: rgba(10, 255, 10, 1);
+    box-shadow: 0 0 10px rgba(255, 200, 0, 0.05);
+    border-color: rgba(255, 200, 0, 0.2);
   }
 
   50% {
-    box-shadow: 0 0 25px rgba(10, 255, 10, 0.7);
-    background-color: rgba(10, 255, 10, 0.15);
-    border-color: rgba(10, 255, 10, 0.6);
+    box-shadow: 0 0 20px rgba(255, 200, 0, 0.15);
+    border-color: rgba(255, 200, 0, 0.5);
   }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #00f3ff;
-  box-shadow: 0 0 10px #00f3ff;
+@keyframes glitch-turn-on {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: brightness(0) blur(10px);
+  }
+
+  10% {
+    opacity: 0.2;
+    transform: scale(0.96) translate(-2px, 2px);
+    filter: brightness(0.2) blur(5px);
+  }
+
+  20% {
+    opacity: 0.1;
+    transform: scale(0.97) translate(2px, -2px);
+    filter: brightness(0.1) blur(4px);
+  }
+
+  30% {
+    opacity: 0.5;
+    transform: scale(0.98) translate(0, 0);
+    filter: brightness(0.8) drop-shadow(0 0 5px rgba(0, 243, 255, 0.5));
+  }
+
+  40% {
+    opacity: 0.2;
+    transform: scale(0.98);
+    filter: brightness(0.5);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(0.99) translate(-1px, -1px);
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(0, 243, 255, 0.8));
+    clip-path: inset(10% 0 80% 0);
+  }
+
+  60% {
+    opacity: 0.6;
+    transform: scale(0.99) translate(1px, 1px);
+    clip-path: inset(0 0 0 0);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 243, 255, 1));
+  }
+
+  80% {
+    opacity: 0.8;
+    filter: brightness(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    clip-path: none;
+  }
+}
+
+.reveal-glitch {
+  animation: glitch-turn-on 1s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  opacity: 0;
+  /* Star hidden by default for the animation to handle */
 }

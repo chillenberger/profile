@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ExperienceItem, EducationItem, ProjectItem, SkillCategory, BlogPost } from './types';
+import { ExperienceItem, EducationItem, ProjectItem, SkillCategory } from './types.js';
 
 export const OVERVIEW = {
   name: 'Daniel Illenberger',

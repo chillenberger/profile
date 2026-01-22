@@ -31,6 +31,7 @@ export interface AnalysisResults {
   highlightedSkillNames: string[];
   highlightedExpIds: string[];
   highlightedProjectNames: string[];
+  highlightedBlogIds: string[];
 }
 
 export async function analyzeJobDescription(jobDesc: string, resumeData: any): Promise<AnalysisResults> {
@@ -59,7 +60,8 @@ export async function analyzeJobDescription(jobDesc: string, resumeData: any): P
       summary: "I encountered an error analyzing the job description. However, based on my general profile, I have strong experience in Full-Stack development and AI implementation.",
       highlightedSkillNames: [],
       highlightedExpIds: [],
-      highlightedProjectNames: []
+      highlightedProjectNames: [],
+      highlightedBlogIds: []
     };
   }
 }
