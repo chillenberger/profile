@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { AlternatingTypewriter } from '../../components/AlternatingTypewriter';
 import { EXPERIENCES, PROJECTS, SKILLS, EDUCATION, Icons } from '../../Experience.js';
 import { BLOG_POSTS } from '../../Blogs/index.js';
 import { analyzeJobDescription, AnalysisResults } from '../../services/geminiService';
