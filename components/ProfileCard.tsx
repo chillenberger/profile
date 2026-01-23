@@ -21,7 +21,7 @@ export const ProfileCard: React.FC = () => {
 
           {/* Layout Grid */}
           <div className="grid grid-cols-12 gap-6 relative z-20">
-            <div className="col-span-12 md:col-span-7 space-y-6">
+            <div className="col-span-12 sm:col-span-7 space-y-6">
               <div>
                 <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-2 font-mono">Subject_Identifier</h3>
                 <p className="text-2xl font-bold text-white tracking-tight">
@@ -74,7 +74,7 @@ export const ProfileCard: React.FC = () => {
             </div>
 
             {/* Right Column: Scan Visual */}
-            <div className="col-span-12 md:col-span-5 space-y-4">
+            <div className="col-span-12 sm:col-span-5 space-y-4">
               <ProfileScanner />
 
               <div className="p-2 border border-neon-purple/20 bg-neon-purple/5 relative overflow-hidden">

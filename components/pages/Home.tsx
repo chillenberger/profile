@@ -19,7 +19,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onAnalyze, analysisResults, isAnalyzing }) => {
   return (
     <section id="about" className="pt-36 pb-32 lg:px-40 px-5 max-w-6xl mx-auto">
-      <div className="max-w-[30rem] mx-auto lg:mx-0">
+      <div className="max-w-[32rem] mx-auto lg:mx-0">
         <ProfileCard />
       </div>
     </section>
