@@ -1,28 +1,44 @@
 steps:
   - name: 'ubuntu'
     script: |
-      echo "Hello, World!"
+      echo "Cloud Build Your Awesome Website!"
 
-  # 1. Build the Docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/portfolio:$COMMIT_SHA', '-t', 'gcr.io/$PROJECT_ID/portfolio:latest', '.']
+  # 1. Run Tests
+  - name: 'node:20'
+    script: |
+      npm ci
+      npm test -- --run
 
-  # 2. Push the image to Container Registry
+  # 2. Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/portfolio:$COMMIT_SHA']
-  
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/portfolio:latest']
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/profile/profile:$COMMIT_SHA'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/profile/profile:latest'
+      - '.'
 
-  # 3. Deploy to Cloud Run
+  # 3. Push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/profile/profile:$COMMIT_SHA'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/profile/profile:latest'
+
+  # 4. Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       - 'run'
       - 'deploy'
-      - 'portfolio'
+      - 'profile'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/portfolio:$COMMIT_SHA'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/profile/profile:$COMMIT_SHA'
       - '--region'
       - 'us-central1'
       - '--platform'
@@ -30,8 +46,8 @@ steps:
       - '--allow-unauthenticated'
 
 images:
-  - 'gcr.io/$PROJECT_ID/portfolio:$COMMIT_SHA'
-  - 'gcr.io/$PROJECT_ID/portfolio:latest'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/profile/profile:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/profile/profile:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
