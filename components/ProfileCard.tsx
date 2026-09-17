@@ -23,7 +23,7 @@ export const ProfileCard: React.FC = () => {
           <div className="grid grid-cols-12 gap-6 relative z-20">
             <div className="col-span-12 sm:col-span-7 space-y-6">
               <div>
-                <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-2 font-mono">Subject_Identifier</h3>
+                <h3 className="text-[10px] uppercase tracking-[0.3em] text-neon-blue/60 mb-2 font-mono">Subject_Identified</h3>
                 <p className="text-2xl font-bold text-white tracking-tight">
                   <Typewriter text={wrapSnakeCaseString("DANIEL_ILLENBERGER")} delay={200} />
                 </p>
