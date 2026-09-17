@@ -104,6 +104,7 @@ const AIChat: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="relative group"
+        data-testid="chat-icon"
       >
         <div className="relative w-32 h-32 flex items-center justify-center">
           <GlitchTriangle className="w-full h-full" />
