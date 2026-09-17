@@ -29,6 +29,6 @@ describe('App routing and layout', () => {
       </MemoryRouter>
     );
 
-    expect(await screen.findByText(/data_logs/i)).toBeInTheDocument();
+    expect(await screen.findByText(/data_logs_!/i)).toBeInTheDocument();
   });
 });
